@@ -13,6 +13,7 @@ public class RiskGui {
 	}
 	
 	private void initialize(Graphics g) throws IOException {
+		
 		JFrame frame = new JFrame("Risk");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -22,7 +23,7 @@ public class RiskGui {
 		Container contentPane = frame.getContentPane();
 		
 		GraphDraw nodesPanel = new GraphDraw(frame.getWidth()-320, frame.getHeight());
-		nodesPanel.setOpaque(true);
+		nodesPanel.setOpaque(false);
 		
 		addNodes(nodesPanel);
 		addEdges(nodesPanel);
@@ -33,6 +34,7 @@ public class RiskGui {
 		BufferedImage img = ImageIO.read(file);
 		Image ReImage = img.getScaledInstance(frame.getWidth()-320, frame.getHeight() , Image.SCALE_SMOOTH);
 		JLabel background=new JLabel(new ImageIcon(ReImage));
+		background.setOpaque(true);
 		contentPane.add(background, BorderLayout.WEST);
 	    
 		CommandPanel command = new CommandPanel();
