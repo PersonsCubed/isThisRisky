@@ -48,8 +48,7 @@ public class CommandPanel extends JPanel{
             	gameOutput = userInputTextPane.getText();
             	userInputTextPane.setText("");
             	gameOutputLabel.setText(gameOutput);	
-            }
-            
+            }      
         });
 		
 		setLayout(new GridBagLayout());        
