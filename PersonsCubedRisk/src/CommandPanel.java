@@ -10,8 +10,10 @@ import java.io.IOException;
 
 public class CommandPanel extends JPanel{
 
-	private String gameOutput="Game output blablabla" ;
+	private String gameOutput="" ;
 	private String userInput;
+	static JTextArea textArea = new JTextArea();
+	static String textDisplayed="";
 
 	public CommandPanel() throws IOException{
 		
@@ -41,7 +43,70 @@ public class CommandPanel extends JPanel{
 		gameOutputLabel.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
 		gameOutputLabel.setBackground(SystemColor.controlHighlight);
 		
+		textArea.setEditable(false); // display only
+		textArea.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
+		JScrollPane scrollingTextArea = new JScrollPane(textArea);
+		System.out.println("making panels");
+		scrollingTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		 /*  userPrompt("Welcome to Risk -the World Conquest Game\n");
+		   userPrompt("Player 1, Enter your name:");
+		   addTextOutput();
+		   userPrompt("Player 2, Enter your name:");
+		   addTextOutput();
+*/
 		userInputButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	gameOutput = userInputTextPane.getText();
+            	userInputTextPane.setText("");
+            	textDisplayed=addTextOutput();
+            	textArea.setText(textDisplayed);	
+            }
+        });
+		
+		userPrompt("Welcome to Risk -the World Conquest Game\n");
+		   userPrompt("Player 1, Enter your name:");
+		   addTextOutput();
+		   userPrompt("Player 2, Enter your name:");
+		   addTextOutput();
+
+		
+		setLayout(new GridBagLayout());        
+        GridBagConstraints gc = new GridBagConstraints();
+        
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.weightx = 0.5;
+        gc.weighty = 0.5;
+        
+        gc.gridx = 0;
+        gc.gridy = 0;
+        add(enterCommandLabel, gc);
+       
+        gc.gridx = 0;
+        gc.gridy = 1;
+        gc.gridwidth = GridBagConstraints.REMAINDER;
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        add(userInputTextPane, gc);
+        
+        gc.gridx = 1;
+        gc.gridy = 0;
+        add(userInputButton, gc);
+        
+        gc.gridx = 0;
+        gc.gridy = 2;
+        add(ouputLabel, gc);
+        
+        gc.gridx = 0;
+        gc.gridy = 3;
+        gc.weighty =50;
+        gc.gridwidth = GridBagConstraints.REMAINDER;
+        gc.fill = GridBagConstraints.BOTH;
+
+
+        add(scrollingTextArea, gc);
+		
+		/*userInputButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,7 +142,7 @@ public class CommandPanel extends JPanel{
         gc.gridx = 0;
         gc.gridy = 3;
         gc.weighty = 40;
-        add(gameOutputLabel, gc);		
+        add(gameOutputLabel, gc);	*/	
 	}
 
 	public String get_gameOutput(){
@@ -90,5 +155,22 @@ public class CommandPanel extends JPanel{
 	
 	public String get_userInput(){
 		return userInput;
+	}
+	
+	public String getTextOutput() {
+		return textDisplayed;
+	}
+	
+	public String addTextOutput(){
+		textDisplayed= textDisplayed + gameOutput +"\n";
+		return textDisplayed;
+	}
+	
+	public String userPrompt(String prompt) {
+		//textArea.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
+		//textArea.setForeground(Color.red);
+		textDisplayed=textDisplayed+prompt+gameOutput;
+    	textArea.setText(textDisplayed);
+		return textDisplayed;
 	}
 }

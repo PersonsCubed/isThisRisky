@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 
 public class RiskGui {
 	
+	//private Info2 Info = new Info2();
+	
 	public RiskGui() throws IOException {
 		initialize(null);
 	}
@@ -21,6 +23,11 @@ public class RiskGui {
 		frame.setVisible(true);
 		
 		Container contentPane = frame.getContentPane();
+		
+		/*JLabel nodes = new JLabel();
+		nodes.add(new MyComponent());
+		nodes.setOpaque(false);
+		contentPane.add(nodes, BorderLayout.WEST);*/
 		
 		GraphDraw nodesPanel = new GraphDraw(frame.getWidth()-320, frame.getHeight());
 		nodesPanel.setOpaque(false);
@@ -41,10 +48,26 @@ public class RiskGui {
 	    command.setBackground(SystemColor.black);
 		contentPane.add(command);
 		
-		frame.pack();
-		
-		
+		frame.pack();	
 	}	
+	
+	/*@SuppressWarnings("serial")
+	public class MyComponent extends JComponent{
+		protected void paintComponent(Graphics g) {
+			for(int i=0;i<41;i++){
+				g.setColor(Color.WHITE);
+				g.fillOval(Info.getX(i), Info.getY(i), 25, 25);
+				
+				int nodeWidth = Math.max(width, f.stringWidth(n.name)+width/2);
+			    g.setColor(Color.white);
+			    g.fillOval(n.x-nodeWidth/2, n.y-nodeHeight/2, nodeWidth, nodeHeight);
+			    g.setColor(Color.black);
+			    g.drawOval(n.x-nodeWidth/2, n.y-nodeHeight/2, nodeWidth, nodeHeight);
+			    g.drawString(n.name, n.x-f.stringWidth(n.name)/2, n.y+f.getHeight()/2);
+			}
+		}
+	}*/
+		
 	private static void addEdges(GraphDraw nodesPanel) {
 		nodesPanel.addEdge(0, 1);
 		nodesPanel.addEdge(0, 2);
