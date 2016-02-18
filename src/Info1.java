@@ -7,7 +7,6 @@ public class Info1 {
 	public static final int INIT_COUNTRIES_PLAYER = 9;
 	public static final int INIT_COUNTRIES_NEUTRAL = 6;
 	public static final int INIT_UNITS_PLAYER = 36;
-	public static final int INIT_UNITS_NEUTRAL = 24;
 	public static final String[] COUNTRY_NAMES = {
 		"Ontario","Quebec","NW Territory","Alberta","Greenland","E United States","W United States","Central America","Alaska",
 		"Great Britain","W Europe","S Europe","Ukraine","N Europe","Iceland","Scandinavia",
@@ -18,7 +17,7 @@ public class Info1 {
 	
 	public static final int[][] ADJACENT = { 
 		{4,1,5,6,3,2},    // 0
-		{4,5,0},
+		{4,5,0,},
 		{4,0,3,8},
 		{2,0,6,8},
 		{14,1,0,2},
@@ -69,6 +68,10 @@ public class Info1 {
 	
 	public String getName(int i){
 		return COUNTRY_NAMES[i];
+	}
+	
+	public int getAdjacents(int i, int j){
+		return ADJACENT[i][j]; 
 	}
 }
 	

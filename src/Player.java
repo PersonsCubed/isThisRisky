@@ -4,6 +4,7 @@ public class Player {//Player class to set name and territories of player object
 	private String name;
 	private int size = 0;
 	private int numArmy = 9;
+	Territory territory;
 	private String [] territories = new String[50];
 
 	public Player(){ 
@@ -19,6 +20,7 @@ public class Player {//Player class to set name and territories of player object
 	
 	public void setTerritories(int y, String w){
 		territories[y] = w;
+		territory = new Territory(this.name, 1);
 		size++;
 	}
 	

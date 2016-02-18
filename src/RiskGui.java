@@ -2,9 +2,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 
-
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+
 import javax.imageio.ImageIO;
 
 public class RiskGui {
@@ -36,7 +37,6 @@ public class RiskGui {
 		CommandPanel command = new CommandPanel();
 		command.setBackground(SystemColor.black);
 		frame.add(command);
-
 		
 		frame.pack();	
 	}	
@@ -45,33 +45,53 @@ public class RiskGui {
 	class MyComponent extends JPanel {
 		Info2 info = new Info2();
 		Info1 info1 = new Info1();
+
 	   
 		public MyComponent() {
 	    	setBounds(0,0,1800,1010);
 	    	setOpaque(false);
 	    }
-
-	    public void paintComponent(Graphics g) {
-	        super.paintComponent(g);       
-	        for(int i=0;i<42;i++){
-	        	g.setColor(Color.black);
+		
+	    @SuppressWarnings("static-access")
+		public void paintComponent(Graphics g) {
+	    	
+	    	int temp ;
+	       
+	    	super.paintComponent(g);       
+	        
+	    	for(int i=0;i<42;i++){
+	        
+	    		g.setColor(Color.black);
 	            g.setFont( new Font("Helvetica", Font.BOLD, 12) );
 	            g.drawString(info1.getName(i), (info.getX(i)+10), info.getY(i));
-	        	if(i<=8) g.setColor(Color.red);
+
+	            g.setColor(Color.white);
+
+	            if(i<=8) g.setColor(Color.red);
 	        	else if(i>8 &&i<16) g.setColor(Color.green);
 	        	else if(i>15 &&i<28) g.setColor(Color.blue);
 	        	else if(i>27 && i<32) g.setColor(Color.yellow);
 	        	else if(i>31 && i<36) g.setColor(Color.black);
 	        	else if(i>35 && i<42) g.setColor(Color.white);
-	        	g.fillOval(info.getX(i),info.getY(i) , 15, 15);
-	        	if(i<=8) g.setColor(Color.black);
+	        	
+	            g.fillOval(info.getX(i),info.getY(i) , 20, 20);
+	        	
+	            if(i<=8) g.setColor(Color.black);
 	        	else if(i>8 &&i<16) g.setColor(Color.yellow);
 	        	else if(i>15 &&i<28) g.setColor(Color.white);
 	        	else if(i>27 && i<32) g.setColor(Color.blue);
 	        	else if(i>31 && i<36) g.setColor(Color.red);
-	        	else if(i>35 && i<42) g.setColor(Color.green);
-	        	g.drawOval(info.getX(i), info.getY(i), 16, 16);
+	        	else if(i>35 && i<42) g.setColor(Color.green);	
+	            
+	            g.drawString("1", info.getX(i)+7, info.getY(i)+14); 
+	            
+	          //draws line between two points	
+	            for(int j=0; j<(info1.ADJACENT[i]).length; j++){ 	            	
+	    			temp = info1.ADJACENT[i][j];	
+	    			g.drawLine(info.getX(i)+10, info.getY(i)+7, info.getX(temp)+10, info.getY(temp)+7);
+	    		} 
+	           
 	        }
-		}
+	    }
 	}
 }

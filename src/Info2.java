@@ -10,48 +10,48 @@ public class Info2 {
 	private static final int FRAME_WIDTH = 1000; // must be even
 	private static final int FRAME_HEIGHT = 600;
 	private static final int[][] COUNTRY_COORD = {
-			{ 240, 250 }, // 0 ontario
-			{ 235, 190 }, //quebec
-			{ 145, 180}, // nw teritory
-			{ 180, 250 },// alberta
-			{ 360, 110 },//grenland
-			{ 250, 320 },//e usa
-			{ 180, 310 },//w usa
-			{ 200, 350 },//central america
-			{ 70, 190 },//namerica alaska
-			{ 470, 260 },//europe britain
-			{ 495, 320 }, // 10 west europe
-			{ 560, 310 },// europe south europe
-			{ 600, 260 }, // europe ukraine
-			{ 540, 280 }, //europe north europe
-			{ 470, 195 },//europe iceland
-			{ 540, 216 },//europe scandanavia
-			{ 670, 320 },//asia afganistan
-			{ 700, 380 },//asia india
-			{ 610, 380 },//asia middle east
-			{ 885, 360 },//asia japan
-			{ 670, 250 }, // 20 asia ural
-			{ 827, 200}, //asia yakutusk
-			{ 930, 216 }, // asia kamchatka
-			{ 765, 410 }, //asia siam
-			{ 800, 250 }, // asia irkutsk
-			{ 730, 216 }, //asia siberia
-			{ 810, 310 }, // asia mogolia
-			{ 765, 350 },// asia-china
-			{ 879, 635 },//done		Australia-eastern Australia
-			{ 890, 515 },//done		Australia-new guinea
-			{ 850, 575 }, // 30 done Australia-western Australia
-			{ 800, 495 }, //done	Australia-Indonesia
-			{ 295, 425 }, //done southAmerica-Venezuela
-			{ 315, 520 }, //done southAmerica-peru
-			{ 345, 455 }, //done southAmerica-brazil
-			{ 315, 590 }, //done south america-argentina
-			{ 540, 500 }, //done Africa-congo
-			{ 480, 430 }, //done Africa-northAfrica
-			{ 550, 570 },//done Africa-south africa
-			{ 550, 400 }, //done africa-egypt
-			{ 580, 470 }, // 40 //africa-east africa
-			{ 625, 540 } };//Africa Madigascar
+			{ 240, 250 },	// ontario
+			{ 235, 190 },   // quebec
+			{ 145, 180},    // nw teritory
+			{ 180, 250 },   // alberta
+			{ 360, 110 },   // grenland
+			{ 250, 320 },   // e usa
+			{ 180, 310 },   // w usa
+			{ 200, 350 },   // central america
+			{ 70, 190 },    // namerica alaska
+			{ 470, 260 },   // europe britain
+			{ 495, 320 },   // west europe			                10
+			{ 560, 310 },   // europe south europe
+			{ 600, 260 },   // europe ukraine
+			{ 540, 280 },   // europe north europe
+			{ 470, 195 },   // europe iceland
+			{ 540, 216 },   // europe scandanavia
+			{ 670, 320 },   // asia afganistan
+			{ 700, 380 },   // asia india
+			{ 610, 380 },   // asia middle east
+			{ 885, 360 },   // asia japan
+			{ 670, 250 },   // asia ural			                20
+			{ 827, 200},    // asia yakutusk
+			{ 930, 216 },   // asia kamchatka
+			{ 765, 410 },   // asia siam
+			{ 800, 250 },   // asia irkutsk
+			{ 730, 216 },   // asia siberia
+			{ 810, 310 },   // asia mogolia
+			{ 765, 350 },   // asia-china
+			{ 879, 635 },   // Australia-eastern Australia
+			{ 890, 515 },   // Australia-new guinea
+			{ 850, 575 },   // Australia-western Australia          30
+			{ 800, 495 },   // Australia-Indonesia
+			{ 295, 425 },   // southAmerica-Venezuela
+			{ 315, 520 },   // southAmerica-peru
+			{ 345, 455 },   // southAmerica-brazil
+			{ 315, 590 },   // south america-argentina
+			{ 540, 500 },   // Africa-congo
+			{ 480, 430 },   // Africa-northAfrica
+			{ 550, 570 },   // Africa-south africa
+			{ 550, 400 },   // africa-egypt
+			{ 580, 470 },   // africa-east africa                   40
+			{ 625, 540 } }; // Africa Madagascar
 
 	public int getContinents() {
 		return NUM_CONTINENTS;

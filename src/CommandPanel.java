@@ -11,6 +11,7 @@ public class CommandPanel extends JPanel{
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	private int numClicks=1; 
 	private String textDisplayed="";
@@ -32,16 +33,43 @@ public class CommandPanel extends JPanel{
 
 	public CommandPanel() throws IOException{
 		
-		//sets the size and border of the main JPanel which will contains all the components below
+        buildLayout();
+		
+		userPrompt("\nWelcome to Risk -\nthe World Conquest Game\n\n");
+		userPrompt("Player 1, Enter your name:");
+
+		userInputButton.addActionListener(new addAction()); 
+		
+		for (int i = 0, j = 9; i < 9; i++) { //loop to assign 9 territories to each of the two user players
+			
+			player1.setTerritories(i, allocateTerritories(i));
+			player2.setTerritories(i, allocateTerritories(j));
+			
+			j++;
+		}
+		
+		for (int i = 0, k = 18, l = 24, m = 30, n = 36; i < 6; i++) {//loop to assign 6 territories to each of the four neutral players
+
+			playerN1.setTerritories(i, allocateTerritories(k));
+			playerN2.setTerritories(i, allocateTerritories(l));
+			playerN3.setTerritories(i, allocateTerritories(m));
+			playerN4.setTerritories(i, allocateTerritories(n));
+			
+			k++;
+			l++;
+			m++;
+			n++;
+		}		
+	}
+	
+	private void buildLayout() { //sets the layout of main JPanel and its components
 		
 		Dimension size = getPreferredSize();
         size.width = 320;
         setPreferredSize(size);
         setBorder(BorderFactory.createLineBorder(Color.black, 20));
-         
-        //sets the appearance of the components
-	    
-        JLabel enterCommandLabel = new JLabel("Enter command: ");
+        
+		JLabel enterCommandLabel = new JLabel("Enter command: ");
 	    enterCommandLabel.setForeground(Color.WHITE);
 	    enterCommandLabel.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
 	    enterCommandLabel.setBackground(SystemColor.controlHighlight);
@@ -100,42 +128,9 @@ public class CommandPanel extends JPanel{
 		gc.fill = GridBagConstraints.BOTH;
 		add(scrollingTextArea, gc);
 		
-		////////********/////////
 		
-		userPrompt("\nWelcome to Risk -\nthe World Conquest Game\n\n");
-		userPrompt("Player 1, Enter your name:");
-
-		userInputButton.addActionListener(new addAction()); 
-		
-		for (int i = 0, j = 9; i < 9; i++) { //loop to assign 9 territories to each of the two user players
-			player1.setTerritories(i, allocateTerritories(i));
-			player2.setTerritories(i, allocateTerritories(j));
-			
-		//	System.out.println(player1.territories[i]); //print statements to check territories are all different for each player
-		//	System.out.println(player2.territories[i]);
-			
-			j++;
-		}
-		
-		for (int i = 0, k = 18, l = 24, m = 30, n = 36; i < 6; i++) {//loop to assign 6 territories to each of the four neutral players
-
-			playerN1.setTerritories(i, allocateTerritories(k));
-			playerN2.setTerritories(i, allocateTerritories(l));
-			playerN3.setTerritories(i, allocateTerritories(m));
-			playerN4.setTerritories(i, allocateTerritories(n));
-		
-		//	System.out.println(playerN1.territories[i]);
-		//	System.out.println(playerN2.territories[i]);
-		//	System.out.println(playerN3.territories[i]);
-		//	System.out.println(playerN4.territories[i]);
-			
-			k++;
-			l++;
-			m++;
-			n++;
-		}		
 	}
-	
+
 	public void userPrompt(String prompt) { //builds an string with all game's outputs so far and displays it at the JTextArea
 		textDisplayed+=prompt+"\n";
     	textArea.setText(textDisplayed);	
