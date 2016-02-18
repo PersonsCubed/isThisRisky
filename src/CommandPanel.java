@@ -32,9 +32,9 @@ public class CommandPanel extends JPanel{
 	private Player playerN4 = new Player("Simon", 6);
 
 	public CommandPanel() throws IOException{
-		
+	       
         buildLayout();
-		
+
 		userPrompt("\nWelcome to Risk -\nthe World Conquest Game\n\n");
 		userPrompt("Player 1, Enter your name:");
 
@@ -127,8 +127,7 @@ public class CommandPanel extends JPanel{
 		gc.gridwidth = GridBagConstraints.REMAINDER;
 		gc.fill = GridBagConstraints.BOTH;
 		add(scrollingTextArea, gc);
-		
-		
+	
 	}
 
 	public void userPrompt(String prompt) { //builds an string with all game's outputs so far and displays it at the JTextArea
@@ -164,7 +163,7 @@ public class CommandPanel extends JPanel{
 	            + player1.printTerritories() + "\n" + "Total number of armys: " + player1.getNumArmy() + "\n\n" + "              *****************");
 	        	
 	        	userPrompt(player2.getName() + ", one army was alocated in\neach of the below territories:\n\n" 
-	    	    + player1.printTerritories() + "\n" + "Total number of armys: " + player2.getNumArmy() + "\n\n");
+	    	    + player2.printTerritories() + "\n" + "Total number of armys: " + player2.getNumArmy() + "\n\n");
 	            numClicks++;
 	        }
 			

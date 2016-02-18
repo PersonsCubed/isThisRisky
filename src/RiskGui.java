@@ -38,7 +38,8 @@ public class RiskGui {
 		command.setBackground(SystemColor.black);
 		frame.add(command);
 		
-		frame.pack();	
+		frame.pack();
+		
 	}	
 		
 	@SuppressWarnings("serial")
@@ -83,7 +84,7 @@ public class RiskGui {
 	        	else if(i>31 && i<36) g.setColor(Color.red);
 	        	else if(i>35 && i<42) g.setColor(Color.green);	
 	            
-	            g.drawString("1", info.getX(i)+7, info.getY(i)+14); 
+	            g.drawString("1", info.getX(i)+7, info.getY(i)+14); //draws the number 1(1 army for start) in the nodes
 	            
 	          //draws line between two points	
 	            for(int j=0; j<(info1.ADJACENT[i]).length; j++){ 	            	

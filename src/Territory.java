@@ -1,5 +1,6 @@
 
-public class Territory {
+public class Territory { //Current Territory Object class which will be potentially incremented in the future
+	
 	private String name;
 	private int numArmys;
 	
