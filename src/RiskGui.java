@@ -1,35 +1,35 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
 import javax.swing.*;
+
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 public class RiskGui {
-
+	
 	public RiskGui() throws IOException {
 		initialize(null);
 	}
-
+	
 	private void initialize(Graphics g) throws IOException {
-		//MyComponent paintCircles = new MyComponent();
-
+		
 		JFrame frame = new JFrame("Risk");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
-
+		
+		Container contentPane = frame.getContentPane();
+		
 		File file = new File("Map.jpg");
 		BufferedImage img = ImageIO.read(file);
-		Image ReImage = img.getScaledInstance(frame.getWidth() - 320,
-				frame.getHeight(), Image.SCALE_SMOOTH);
-		JLabel background = new JLabel(new ImageIcon(ReImage));
-		// JLabel nodes=new JLabel();
-
+		Image ReImage = img.getScaledInstance(frame.getWidth()-320, frame.getHeight() , Image.SCALE_SMOOTH);
+		JLabel background=new JLabel(new ImageIcon(ReImage));
+		background.setOpaque(true);
+		contentPane.add(background, BorderLayout.WEST);
+	    
 		background.setOpaque(true);
 		frame.add(new MyComponent());
 		frame.add(background, BorderLayout.WEST);
@@ -37,10 +37,10 @@ public class RiskGui {
 		command.setBackground(SystemColor.black);
 		frame.add(command);
 
-		frame.pack();
-		System.out.println("done!");
-	}
-
+		
+		frame.pack();	
+	}	
+		
 	@SuppressWarnings("serial")
 	class MyComponent extends JPanel {
 		Info2 info = new Info2();
