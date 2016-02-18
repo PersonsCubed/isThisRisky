@@ -8,11 +8,14 @@ import javax.swing.*;
 
 import java.io.IOException;
 
+@SuppressWarnings("serial")
 public class CommandPanel extends JPanel{
 
 	private String gameOutput="Game output blablabla" ;
 	private String userInput;
-
+	static JTextArea textArea = new JTextArea();
+	static String textDisplayed;
+	
 	public CommandPanel() throws IOException{
 		
 		Dimension size = getPreferredSize();
@@ -26,7 +29,7 @@ public class CommandPanel extends JPanel{
 	    enterCommandLabel.setBackground(SystemColor.controlHighlight);
 		
 		JTextPane userInputTextPane = new JTextPane();
-		userInputTextPane.setPreferredSize(new Dimension(200, 23));
+		userInputTextPane.setPreferredSize(new Dimension(2000, 23));
 		
 		JButton userInputButton = new JButton("send");
 		userInputButton.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
@@ -41,14 +44,22 @@ public class CommandPanel extends JPanel{
 		gameOutputLabel.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
 		gameOutputLabel.setBackground(SystemColor.controlHighlight);
 		
+		textArea.setEditable(false); // display only
+		textArea.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
+		JScrollPane scrollingTextArea = new JScrollPane(textArea);
+		System.out.println("making panels");
+		scrollingTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollingTextArea.setBackground(SystemColor.controlHighlight);
+		scrollingTextArea.setForeground(Color.BLACK);
+		
 		userInputButton.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
             	gameOutput = userInputTextPane.getText();
             	userInputTextPane.setText("");
             	gameOutputLabel.setText(gameOutput);	
-            }      
+            }
+            
         });
 		
 		setLayout(new GridBagLayout());        
@@ -64,10 +75,12 @@ public class CommandPanel extends JPanel{
        
         gc.gridx = 0;
         gc.gridy = 1;
+        gc.gridwidth = GridBagConstraints.REMAINDER;
+        gc.fill = GridBagConstraints.HORIZONTAL;
         add(userInputTextPane, gc);
         
         gc.gridx = 1;
-        gc.gridy = 1;
+        gc.gridy = 0;
         add(userInputButton, gc);
         
         gc.gridx = 0;
@@ -76,8 +89,12 @@ public class CommandPanel extends JPanel{
         
         gc.gridx = 0;
         gc.gridy = 3;
-        gc.weighty = 40;
-        add(gameOutputLabel, gc);		
+        gc.weighty =50;
+        gc.gridwidth = GridBagConstraints.REMAINDER;
+        gc.fill = GridBagConstraints.BOTH;
+
+
+        add(scrollingTextArea, gc);
 	}
 
 	public String get_gameOutput(){
