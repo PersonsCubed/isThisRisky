@@ -14,6 +14,7 @@ public class Info1 {
 		"E Australia","New Guinea","W Australia","Indonesia",
 		"Venezuela","Peru","Brazil","Argentina",
 		"Congo","N Africa","S Africa","Egypt","E Africa","Madagascar"};  // for reference
+	
 	public static final int[][] ADJACENT = { 
 		{4,1,5,6,3,2},    // 0
 		{4,5,0},
@@ -58,4 +59,12 @@ public class Info1 {
 		{39,18,41,38,36,37},  //40
 		{38,40}
 	};
+	
+	public String getTerritories(int x){//method to return a string from the array of strings of territories names
+		String terr1=COUNTRY_NAMES[x];
+		return terr1;
+		
+	}
+	
+
 }

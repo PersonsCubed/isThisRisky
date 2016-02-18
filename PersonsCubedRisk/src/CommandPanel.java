@@ -1,8 +1,6 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.InputMethodListener;
 
 import javax.swing.*;
 
@@ -10,167 +8,185 @@ import java.io.IOException;
 
 public class CommandPanel extends JPanel{
 
-	private String gameOutput="" ;
-	private String userInput;
-	static JTextArea textArea = new JTextArea();
-	static String textDisplayed="";
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int numClicks=1; 
+	private String textDisplayed="";
+	private String player_1_name=null;
+	private String player_2_name=null;
+	
+	private JTextArea textArea = new JTextArea();
+	private JTextPane userInputTextPane = new JTextPane();
+	private JButton userInputButton = new JButton();
+	private JLabel ouputLabel = new JLabel();
+	
+	//declares 6 object "Player" being 2 user players and 4 neutrals
+	private Player player1 = new Player();
+	private Player player2 = new Player();
+	private Player playerN1 = new Player();
+	private Player playerN2 = new Player();
+	private Player playerN3 = new Player();
+	private Player playerN4 = new Player();
 
 	public CommandPanel() throws IOException{
+		
+		//sets the size and border of the main JPanel which will contains all the components below
 		
 		Dimension size = getPreferredSize();
         size.width = 320;
         setPreferredSize(size);
         setBorder(BorderFactory.createLineBorder(Color.black, 20));
-
-	    JLabel enterCommandLabel = new JLabel("Enter command: ");
+         
+        //sets the appearance of the components
+	    
+        JLabel enterCommandLabel = new JLabel("Enter command: ");
 	    enterCommandLabel.setForeground(Color.WHITE);
 	    enterCommandLabel.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
 	    enterCommandLabel.setBackground(SystemColor.controlHighlight);
 		
-		JTextPane userInputTextPane = new JTextPane();
 		userInputTextPane.setPreferredSize(new Dimension(200, 23));
 		
-		JButton userInputButton = new JButton("send");
+		userInputButton.setText("Send");
 		userInputButton.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
 		
-		JLabel ouputLabel = new JLabel("Ouput: ");
+		ouputLabel.setText("Ouput: ");
 		ouputLabel.setForeground(Color.WHITE);
 		ouputLabel.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
 		ouputLabel.setBackground(SystemColor.controlHighlight);
 		
-		JLabel gameOutputLabel = new JLabel(gameOutput);
-		gameOutputLabel.setForeground(Color.RED);
-		gameOutputLabel.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
-		gameOutputLabel.setBackground(SystemColor.controlHighlight);
-		
 		textArea.setEditable(false); // display only
 		textArea.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
+		textArea.setForeground(Color.red);
+		textArea.setBackground(Color.black);
+		
 		JScrollPane scrollingTextArea = new JScrollPane(textArea);
+		scrollingTextArea.setBorder(null);
 		System.out.println("making panels");
 		scrollingTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
-		 /*  userPrompt("Welcome to Risk -the World Conquest Game\n");
-		   userPrompt("Player 1, Enter your name:");
-		   addTextOutput();
-		   userPrompt("Player 2, Enter your name:");
-		   addTextOutput();
-*/
-		userInputButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	gameOutput = userInputTextPane.getText();
-            	userInputTextPane.setText("");
-            	textDisplayed=addTextOutput();
-            	textArea.setText(textDisplayed);	
-            }
-        });
-		
-		userPrompt("Welcome to Risk -the World Conquest Game\n");
-		   userPrompt("Player 1, Enter your name:");
-		   addTextOutput();
-		   userPrompt("Player 2, Enter your name:");
-		   addTextOutput();
-
+		/////uses GidBagLayout to set the layout of the main JPanel//////
 		
 		setLayout(new GridBagLayout());        
-        GridBagConstraints gc = new GridBagConstraints();
-        
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.weightx = 0.5;
-        gc.weighty = 0.5;
-        
-        gc.gridx = 0;
-        gc.gridy = 0;
-        add(enterCommandLabel, gc);
-       
-        gc.gridx = 0;
-        gc.gridy = 1;
-        gc.gridwidth = GridBagConstraints.REMAINDER;
-        gc.fill = GridBagConstraints.HORIZONTAL;
-        add(userInputTextPane, gc);
-        
-        gc.gridx = 1;
-        gc.gridy = 0;
-        add(userInputButton, gc);
-        
-        gc.gridx = 0;
-        gc.gridy = 2;
-        add(ouputLabel, gc);
-        
-        gc.gridx = 0;
-        gc.gridy = 3;
-        gc.weighty =50;
-        gc.gridwidth = GridBagConstraints.REMAINDER;
-        gc.fill = GridBagConstraints.BOTH;
-
-
-        add(scrollingTextArea, gc);
+		GridBagConstraints gc = new GridBagConstraints();
+	
+		gc.anchor = GridBagConstraints.FIRST_LINE_START;
+		gc.weightx = 0.5;
+		gc.weighty = 0.5;
+    
+		gc.gridx = 0;
+		gc.gridy = 0;
+		add(enterCommandLabel, gc);
+   
+		gc.gridx = 0;
+		gc.gridy = 1;
+		gc.gridwidth = GridBagConstraints.REMAINDER;
+		gc.fill = GridBagConstraints.HORIZONTAL;
+		add(userInputTextPane, gc);
+    
+		gc.gridx = 1;
+		gc.gridy = 0;
+		add(userInputButton, gc);
+    
+		gc.gridx = 0;
+		gc.gridy = 2;
+		add(ouputLabel, gc);
+    
+		gc.gridx = 0;
+		gc.gridy = 3;
+		gc.weighty =50;
+		gc.gridwidth = GridBagConstraints.REMAINDER;
+		gc.fill = GridBagConstraints.BOTH;
+		add(scrollingTextArea, gc);
 		
-		/*userInputButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	gameOutput = userInputTextPane.getText();
-            	userInputTextPane.setText("");
-            	gameOutputLabel.setText(gameOutput);	
-            }      
-        });
+		////////********/////////
 		
-		setLayout(new GridBagLayout());        
-        GridBagConstraints gc = new GridBagConstraints();
-        
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.weightx = 0.5;
-        gc.weighty = 0.5;
-        
-        gc.gridx = 0;
-        gc.gridy = 0;
-        add(enterCommandLabel, gc);
-       
-        gc.gridx = 0;
-        gc.gridy = 1;
-        add(userInputTextPane, gc);
-        
-        gc.gridx = 1;
-        gc.gridy = 1;
-        add(userInputButton, gc);
-        
-        gc.gridx = 0;
-        gc.gridy = 2;
-        add(ouputLabel, gc);
-        
-        gc.gridx = 0;
-        gc.gridy = 3;
-        gc.weighty = 40;
-        add(gameOutputLabel, gc);	*/	
+		userPrompt("\nWelcome to Risk -\nthe World Conquest Game\n\n");
+		userPrompt("Player 1, Enter your name:");
+
+		userInputButton.addActionListener(new addAction()); 
+		
+		playerN1.setName("Mary");
+		playerN2.setName("John");
+		playerN3.setName("Ann");
+		playerN4.setName("Simon");
+		
+		for (int i = 0, j = 9; i < 9; i++) { //loop to assign 9 territories to each of the two user players
+			player1.setTerritories(i, allocateTerritories(i));
+			player2.setTerritories(i, allocateTerritories(j));
+			
+		//	System.out.println(player1.territories[i]); //print statements to check territories are all different for each player
+		//	System.out.println(player2.territories[i]);
+			
+			j++;
+		}
+		
+		for (int i = 0, k = 18, l = 24, m = 30, n = 36; i < 6; i++) {//loop to assign 6 territories to each of the four neutral players
+
+			playerN1.setTerritories(i, allocateTerritories(k));
+			playerN2.setTerritories(i, allocateTerritories(l));
+			playerN3.setTerritories(i, allocateTerritories(m));
+			playerN4.setTerritories(i, allocateTerritories(n));
+		
+		//	System.out.println(playerN1.territories[i]);
+		//	System.out.println(playerN2.territories[i]);
+		//	System.out.println(playerN3.territories[i]);
+		//	System.out.println(playerN4.territories[i]);
+			
+			k++;
+			l++;
+			m++;
+			n++;
+		}		
+	}
+	
+	public void userPrompt(String prompt) { //builds an string with all game's outputs so far and displays it at the JTextArea
+		textDisplayed+=prompt+"\n";
+    	textArea.setText(textDisplayed);	
+	}
+	
+	class addAction implements ActionListener {  //implements actions to the "send" button
+		public void actionPerformed(ActionEvent e) {
+			
+			//if it is the first click and something is typed to the JTextPane, it assigns the string entered to player 1,
+			//display greeting message and asks for the next player's name 
+			
+			if(numClicks==1 && ((player_1_name = userInputTextPane.getText()).length()>0)){
+				player_1_name = userInputTextPane.getText();
+				userInputTextPane.setText("");
+				player1.setName(player_1_name);
+				userPrompt("Hi " + player_1_name + "!\n");
+				userPrompt("Player 2, Enter your name:");
+				numClicks++;
+			}
+			
+			//If it is the second click and something is typed to the JTextPane, it assigns the string entered to player 2, 
+			//display greeting messages and the territories allocated for each of the user players
+			
+			else if(numClicks==2 && ((player_2_name = userInputTextPane.getText()).length()>0)){
+	            	userInputTextPane.setText("");
+	            	player2.setName(player_2_name);
+	            	userPrompt("Hi " + player_2_name + "!\n\nNow let's play!\n\n" );
+	            	userPrompt("Territories alocated for " + player1.getName() + ": ");
+	        		userPrompt(player1.printTerritories());
+	        		userPrompt("Territories alocated for " + player2.getName() + ": ");
+	        		userPrompt(player2.printTerritories());
+	            	numClicks++;
+	        }
+			
+			//if an invalid command is entered to the TextPane, it displays "Command invalid" message 
+			else if(numClicks>2 && ((userInputTextPane.getText().length())>0)){
+				userInputTextPane.setText("");
+				userPrompt("Command invalid");
+			}	
+		}
+	}
+	
+	public String allocateTerritories(int i) { 
+		Info1 Info = new Info1(); //uses the Info1.java file to access the array of strings storing the list of territories
+		String P = Info.getTerritories(i); //uses the getTerritories method defined in Info1 to get territories names from the array
+		return P;
 	}
 
-	public String get_gameOutput(){
-		return gameOutput;
-	}
-	
-	public void change_gameOutput(String s){
-		s=gameOutput;
-	}
-	
-	public String get_userInput(){
-		return userInput;
-	}
-	
-	public String getTextOutput() {
-		return textDisplayed;
-	}
-	
-	public String addTextOutput(){
-		textDisplayed= textDisplayed + gameOutput +"\n";
-		return textDisplayed;
-	}
-	
-	public String userPrompt(String prompt) {
-		//textArea.setFont(new Font("Trajan Pro", Font.PLAIN, 11));
-		//textArea.setForeground(Color.red);
-		textDisplayed=textDisplayed+prompt+gameOutput;
-    	textArea.setText(textDisplayed);
-		return textDisplayed;
-	}
 }
