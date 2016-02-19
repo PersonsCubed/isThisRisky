@@ -43,3 +43,4 @@ public class Player {//Player class to set name and territories of player object
 		return name;
 	}
 }
+

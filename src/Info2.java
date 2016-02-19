@@ -83,3 +83,4 @@ public class Info2 {
 		return COUNTRY_COORD [x][1];
 	}
 }
+
