@@ -1,11 +1,8 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-
 import javax.imageio.ImageIO;
 
 public class RiskGui {
@@ -65,34 +62,34 @@ public class RiskGui {
 	    		g.setColor(Color.black);
 	            g.setFont( new Font("Helvetica", Font.BOLD, 12) );
 	            g.drawString(info1.getName(i), (info.getX(i)+10), info.getY(i));
-
-	            g.setColor(Color.white);
-
-	            if(i<=8) g.setColor(Color.red);
-	        	else if(i>8 &&i<16) g.setColor(Color.green);
-	        	else if(i>15 &&i<28) g.setColor(Color.blue);
-	        	else if(i>27 && i<32) g.setColor(Color.yellow);
-	        	else if(i>31 && i<36) g.setColor(Color.black);
-	        	else if(i>35 && i<42) g.setColor(Color.white);
-	        	
-	            g.fillOval(info.getX(i),info.getY(i) , 20, 20);
 	        	
 	            if(i<=8) g.setColor(Color.black);
 	        	else if(i>8 &&i<16) g.setColor(Color.yellow);
 	        	else if(i>15 &&i<28) g.setColor(Color.white);
 	        	else if(i>27 && i<32) g.setColor(Color.blue);
 	        	else if(i>31 && i<36) g.setColor(Color.red);
-	        	else if(i>35 && i<42) g.setColor(Color.green);	
-	            
-	            g.drawString("1", info.getX(i)+7, info.getY(i)+14); //draws the number 1(1 army for start) in the nodes
-	            
+	        	else if(i>35 && i<42) g.setColor(Color.green);
+	           	     
 	          //draws line between two points	
 	            for(int j=0; j<(info1.ADJACENT[i]).length; j++){ 	            	
 	    			temp = info1.ADJACENT[i][j];	
 	    			g.drawLine(info.getX(i)+10, info.getY(i)+7, info.getX(temp)+10, info.getY(temp)+7);
-	    		} 
+	    		}
+	    	}
+	            for(int i=0;i<42;i++){
+		            if(i<=8) g.setColor(Color.red);
+		        	else if(i>8 &&i<16) g.setColor(Color.green);
+		        	else if(i>15 &&i<28) g.setColor(Color.blue);
+		        	else if(i>27 && i<32) g.setColor(Color.yellow);
+		        	else if(i>31 && i<36) g.setColor(Color.black);
+		        	else if(i>35 && i<42) g.setColor(Color.pink);
+		        	
+		            g.fillOval(info.getX(i),info.getY(i) , 20, 20);
+		            
+		            g.setColor(Color.white);
+		            g.drawString("1", info.getX(i)+7, info.getY(i)+14); //draws the number 1(1 army for start) in the nodes
+	            }
 	           
-	        }
 	    }
 	}
 }

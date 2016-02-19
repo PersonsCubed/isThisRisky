@@ -1,3 +1,12 @@
+/*
+ * Persons Cubed Risk
+ * -Steven Clerkin
+ * -Roisin McLarney
+ * -Natalia Tonoulier 
+ */
+
+
+
 import java.io.IOException;
 
 public class main {
