@@ -4,8 +4,10 @@ public class Player {//Player class to set name and territories of player object
 	private String name;
 	private int size = 0;
 	private int numArmy = 36;
+	private int i = 0;
 	Territory territory;
 	private String [] territories = new String[50];
+	private Card[] arrayCards = new Card[20];
 
 	public Player(){ 
 	}
@@ -14,6 +16,7 @@ public class Player {//Player class to set name and territories of player object
 		name = nameInput;
 		numArmy = numArmyInput;
 	}
+	
 	public void setName(String x){ 
 		name = x;
 	}
@@ -41,6 +44,12 @@ public class Player {//Player class to set name and territories of player object
 	
 	public String getName(){
 		return name;
+	}
+	
+	public void getCard(Card x){
+		
+		arrayCards[i]=x;
+		i++;
 	}
 }
 

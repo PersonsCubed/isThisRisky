@@ -5,8 +5,6 @@
  * -Natalia Tonoulier 
  */
 
-
-
 import java.io.IOException;
 
 public class main {

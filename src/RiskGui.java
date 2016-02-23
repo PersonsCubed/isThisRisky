@@ -7,13 +7,16 @@ import javax.imageio.ImageIO;
 
 public class RiskGui {
 	
+	private JFrame frame = new JFrame("Risk");
+	private JButton deckOfCards = new JButton("Cards");
+	
+	
 	public RiskGui() throws IOException {
 		initialize(null);
 	}
 	
 	private void initialize(Graphics g) throws IOException {
 		
-		JFrame frame = new JFrame("Risk");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setLayout(new BorderLayout());
@@ -27,6 +30,11 @@ public class RiskGui {
 		JLabel background=new JLabel(new ImageIcon(ReImage));
 		background.setOpaque(true);
 		contentPane.add(background, BorderLayout.WEST);
+		
+		deckOfCards.setBounds(43,588,73,93);
+		deckOfCards.setBackground(Color.yellow.darker());
+		deckOfCards.setForeground(Color.yellow.darker().darker().darker());
+		frame.add(deckOfCards);
 	    
 		background.setOpaque(true);
 		frame.add(new MyComponent());
@@ -90,6 +98,32 @@ public class RiskGui {
 		            g.drawString("1", info.getX(i)+7, info.getY(i)+14); //draws the number 1(1 army for start) in the nodes
 	            }
 	           
+	            //draw deck of cards
+	            g.setColor(Color.yellow.darker());
+                g.fillRect(25,600,80,100);
+                g.setColor(Color.white);
+                g.drawRect(28,603,73,93);
+                g.drawRect(29,604,71,91);
+                
+                g.setColor(Color.yellow.darker());
+                g.fillRect(30,595,80,100);
+                g.setColor(Color.yellow.darker().darker().darker());
+                g.drawRect(33,598,73,93);
+                g.drawRect(34,599,71,91);
+                
+                g.setColor(Color.yellow.darker());
+                g.fillRect(35,590,80,100);
+                g.setColor(Color.white);
+                g.drawRect(38,593,73,93);
+                g.drawRect(39,594,71,91);
+                
+                g.setColor(Color.yellow.darker());
+                g.fillRect(40,585,80,100);
+                g.setColor(Color.yellow.darker().darker().darker());
+                g.drawRect(43,588,73,93);
+                g.drawRect(44,589,71,91);
+                g.drawString("CARDS", 60, 640);
+
 	    }
 	}
 }

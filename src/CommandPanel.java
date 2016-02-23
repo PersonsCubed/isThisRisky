@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class CommandPanel extends JPanel{
 
@@ -48,8 +49,17 @@ public class CommandPanel extends JPanel{
 				
 		buildCards();
 		
+		drawTerritoryCard();
 	}
 	
+	private Card drawTerritoryCard() {  //return random Territory card
+		
+		Random rand = new Random();
+
+		return arrayCards[rand.nextInt(41) + 0];
+		
+	}
+
 	private void assignTerritories() { //assign territories to user and neutral players
 		
 		for (int i = 0, j = 9; i < 9; i++) { //loop to assign 9 territories to each of the two user players
@@ -223,12 +233,15 @@ public class CommandPanel extends JPanel{
 	            + player1.printTerritories() + "\n" + "Total number of armys: " + player1.getNumArmy() + "\n\n" + "              *****************");
 	        	
 	        	userPrompt(player2.getName() + ", one army was alocated in\neach of the below territories:\n\n" 
-	    	    + player2.printTerritories() + "\n" + "Total number of armys: " + player2.getNumArmy() + "\n\n");
+	    	    + player2.printTerritories() + "\n" + "Total number of armys: " + player2.getNumArmy() + "\n\n\n");
+	        	
+	        	userPrompt("Now " + player1.getName() + "draw a card from the deck:\n\n");
+	        	
 	            numClicks++;
-	        }
+	        }			
 			
 			//if an invalid command is entered to the TextPane, it displays "Command invalid" message 
-			else if(numClicks>2 && ((userInputTextPane.getText().length())>0)){
+			else if((userInputTextPane.getText().length())>0){
 				userInputTextPane.setText("");
 				userPrompt("Command invalid");
 			}	
