@@ -27,10 +27,13 @@ public class CommandPanel extends JPanel{
 	//declares 6 object "Player" being 2 user players and 4 neutrals
 	private Player player1 = new Player();
 	private Player player2 = new Player();
-	private Player playerN1 = new Player("Mary", 6);
-	private Player playerN2 = new Player("John", 6);
-	private Player playerN3 = new Player("Ann", 6);
-	private Player playerN4 = new Player("Simon", 6);
+	private Player playerN1 = new Player("Mary", 24);
+	private Player playerN2 = new Player("John", 24);
+	private Player playerN3 = new Player("Ann", 24);
+	private Player playerN4 = new Player("Simon", 24);
+	
+	//declare array of object Card
+	private Card[] arrayCards = new Card[42];
 
 	public CommandPanel() throws IOException{
 	       
@@ -40,6 +43,14 @@ public class CommandPanel extends JPanel{
 		userPrompt("Player 1, Enter your name:");
 
 		userInputButton.addActionListener(new addAction()); 
+		
+		assignTerritories();
+				
+		buildCards();
+		
+	}
+	
+	private void assignTerritories() { //assign territories to user and neutral players
 		
 		for (int i = 0, j = 9; i < 9; i++) { //loop to assign 9 territories to each of the two user players
 			
@@ -60,9 +71,57 @@ public class CommandPanel extends JPanel{
 			l++;
 			m++;
 			n++;
-		}		
+		}	
+		
 	}
-	
+
+	private void buildCards() { //build 42 object cards containing name of territory and type of army
+		
+		arrayCards[0]= new Card(Info1.COUNTRY_NAMES[0], "Cavalry"); 
+		arrayCards[1]= new Card(Info1.COUNTRY_NAMES[1], "Artillery");
+		arrayCards[2]= new Card(Info1.COUNTRY_NAMES[2], "Artillery");
+		arrayCards[3]= new Card(Info1.COUNTRY_NAMES[3], "Infantry");
+		arrayCards[4]= new Card(Info1.COUNTRY_NAMES[4], "Cavalry");
+		arrayCards[5]= new Card(Info1.COUNTRY_NAMES[5], "Artillery");
+		arrayCards[6]= new Card(Info1.COUNTRY_NAMES[6], "Infantry");
+		arrayCards[7]= new Card(Info1.COUNTRY_NAMES[7], "Cavalry");
+		arrayCards[8]= new Card(Info1.COUNTRY_NAMES[8], "Infantry");		
+		arrayCards[9]= new Card(Info1.COUNTRY_NAMES[9], "Cavalry");
+		arrayCards[10]= new Card(Info1.COUNTRY_NAMES[10], "Infantry");
+		arrayCards[11]= new Card(Info1.COUNTRY_NAMES[11], "Cavalry");
+		arrayCards[12]= new Card(Info1.COUNTRY_NAMES[12], "Artillery");
+		arrayCards[13]= new Card(Info1.COUNTRY_NAMES[13], "Cavalry");
+		arrayCards[14]= new Card(Info1.COUNTRY_NAMES[14], "Infantry");
+		arrayCards[15]= new Card(Info1.COUNTRY_NAMES[15], "Artillery");
+		arrayCards[16]= new Card(Info1.COUNTRY_NAMES[16], "Infantry");
+		arrayCards[17]= new Card(Info1.COUNTRY_NAMES[17], "Infantry");		
+		arrayCards[18]= new Card(Info1.COUNTRY_NAMES[18], "Artillery");
+		arrayCards[19]= new Card(Info1.COUNTRY_NAMES[19], "Infantry");
+		arrayCards[20]= new Card(Info1.COUNTRY_NAMES[20], "Cavalry");
+		arrayCards[21]= new Card(Info1.COUNTRY_NAMES[21], "Cavalry");
+		arrayCards[22]= new Card(Info1.COUNTRY_NAMES[22], "Cavalry");
+		arrayCards[23]= new Card(Info1.COUNTRY_NAMES[23], "Artillery");
+		arrayCards[24]= new Card(Info1.COUNTRY_NAMES[24], "Infantry");
+		arrayCards[25]= new Card(Info1.COUNTRY_NAMES[25], "Artillery");
+		arrayCards[26]= new Card(Info1.COUNTRY_NAMES[26], "Artillery");		
+		arrayCards[27]= new Card(Info1.COUNTRY_NAMES[27], "Cavalry");
+		arrayCards[28]= new Card(Info1.COUNTRY_NAMES[28], "Infantry");
+		arrayCards[29]= new Card(Info1.COUNTRY_NAMES[29], "Cavalry");
+		arrayCards[30]= new Card(Info1.COUNTRY_NAMES[30], "Artillery");
+		arrayCards[31]= new Card(Info1.COUNTRY_NAMES[31], "Cavalry");
+		arrayCards[32]= new Card(Info1.COUNTRY_NAMES[32], "Artillery");
+		arrayCards[33]= new Card(Info1.COUNTRY_NAMES[33], "Cavalry");
+		arrayCards[34]= new Card(Info1.COUNTRY_NAMES[34], "Artillery");
+		arrayCards[35]= new Card(Info1.COUNTRY_NAMES[37], "Infantry");		
+		arrayCards[36]= new Card(Info1.COUNTRY_NAMES[36], "Cavalry");
+		arrayCards[37]= new Card(Info1.COUNTRY_NAMES[37], "Infantry");
+		arrayCards[38]= new Card(Info1.COUNTRY_NAMES[38], "Artillery");
+		arrayCards[39]= new Card(Info1.COUNTRY_NAMES[39], "Infantry");
+		arrayCards[40]= new Card(Info1.COUNTRY_NAMES[40], "Artillery");
+		arrayCards[41]= new Card(Info1.COUNTRY_NAMES[41], "Infantry");
+		
+	}
+
 	private void buildLayout() { //sets the layout of main JPanel and its components
 		
 		Dimension size = getPreferredSize();
