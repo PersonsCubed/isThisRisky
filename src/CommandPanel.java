@@ -16,6 +16,7 @@ public class CommandPanel extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 	private int numClicks=1; 
+	private int numCardsDrawn=1;
 	private String textDisplayed="";
 	private String player_1_name=null;
 	private String player_2_name=null;
@@ -32,6 +33,7 @@ public class CommandPanel extends JPanel{
 	private Player playerN2 = new Player("John", 24);
 	private Player playerN3 = new Player("Ann", 24);
 	private Player playerN4 = new Player("Simon", 24);
+	
 	
 	//declare array of object Card
 	private Card[] arrayCards = new Card[42];
@@ -162,7 +164,7 @@ public class CommandPanel extends JPanel{
 		JScrollPane scrollingTextArea = new JScrollPane(textArea);
 		scrollingTextArea.setBorder(null);
 		System.out.println("making panels");
-		scrollingTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollingTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);		
 		
 		/////uses GidBagLayout to set the layout of the main JPanel//////
 		
@@ -233,10 +235,28 @@ public class CommandPanel extends JPanel{
 	            + player1.printTerritories() + "\n" + "Total number of armys: " + player1.getNumArmy() + "\n\n" + "              *****************");
 	        	
 	        	userPrompt(player2.getName() + ", one army was alocated in\neach of the below territories:\n\n" 
-	    	    + player2.printTerritories() + "\n" + "Total number of armys: " + player2.getNumArmy() + "\n\n\n");
+	    	    + player2.printTerritories() + "\n" + "Total number of armys: " + player2.getNumArmy() + "\n\n");
 	        	
-	        	userPrompt("Now " + player1.getName() + "draw a card from the deck:\n\n");
+	        	userPrompt("Now " + player1.getName() + ", draw a card\nfrom the deck:\n\n");
 	        	
+	        	//activates deckOfCards button	
+	        	RiskGui.deckOfCards.addActionListener(new ActionListener() {
+	                @Override
+	                public void actionPerformed(ActionEvent e) {
+	                	if(numCardsDrawn==1){
+	                		player1.setCard(drawTerritoryCard());
+	                		userPrompt(player1.getName() + ", you got\n" + player1.getCard() + "\n\n");
+	                		userPrompt("Now " + player2.getName() + ", draw a card\nfrom the deck:\n\n");
+	                		numCardsDrawn++;
+	                	}
+	                	else if(numCardsDrawn==2){
+	                		player2.setCard(drawTerritoryCard());	           
+	                		userPrompt(player2.getName() + ", you got\n" + player2.getCard() + "\n\n");
+	                		numCardsDrawn++;
+	                	}
+	                }
+	             });	        	
+
 	            numClicks++;
 	        }			
 			

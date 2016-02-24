@@ -7,9 +7,8 @@ import javax.imageio.ImageIO;
 
 public class RiskGui {
 	
-	private JFrame frame = new JFrame("Risk");
-	private JButton deckOfCards = new JButton("Cards");
-	
+	public JFrame frame = new JFrame("Risk");	
+	public static JButton deckOfCards = new JButton("Cards");
 	
 	public RiskGui() throws IOException {
 		initialize(null);
@@ -21,6 +20,7 @@ public class RiskGui {
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
+		
 		
 		Container contentPane = frame.getContentPane();
 		
@@ -34,14 +34,16 @@ public class RiskGui {
 		deckOfCards.setBounds(43,588,73,93);
 		deckOfCards.setBackground(Color.yellow.darker());
 		deckOfCards.setForeground(Color.yellow.darker().darker().darker());
+		
 		frame.add(deckOfCards);
-	    
+
 		background.setOpaque(true);
 		frame.add(new MyComponent());
 		frame.add(background, BorderLayout.WEST);
 		CommandPanel command = new CommandPanel();
 		command.setBackground(SystemColor.black);
 		frame.add(command);
+		
 		
 		frame.pack();
 		

@@ -46,10 +46,15 @@ public class Player {//Player class to set name and territories of player object
 		return name;
 	}
 	
-	public void getCard(Card x){
+	public void setCard(Card x){
 		
 		arrayCards[i]=x;
 		i++;
+	}
+	
+	public String getCard(){
+		String s = arrayCards[i-1].getTerritoryNameCard() + " - " + arrayCards[i-1].getTypeArmy();
+		return s;
 	}
 }
 

@@ -17,7 +17,7 @@ public class Card {
 		return territoryNameCard;
 	}
 	
-	public String typeArmy(){
+	public String getTypeArmy(){
 		return typeArmy;
 	}
 }
