@@ -16,13 +16,13 @@ public class Info2 {
 			{ 180, 250 },   // alberta
 			{ 360, 110 },   // grenland
 			{ 250, 320 },   // e usa
-			{ 180, 310 },   // w usa
+			{ 170, 300 },   // w usa
 			{ 200, 350 },   // central america
 			{ 70, 190 },    // namerica alaska
 			{ 470, 260 },   // europe britain
-			{ 495, 320 },   // west europe			                10
+			{ 480, 320 },   // west europe			                10
 			{ 560, 310 },   // europe south europe
-			{ 600, 260 },   // europe ukraine
+			{ 600, 245 },   // europe ukraine
 			{ 540, 280 },   // europe north europe
 			{ 470, 195 },   // europe iceland
 			{ 540, 216 },   // europe scandanavia

@@ -2,6 +2,7 @@
 public class Player {//Player class to set name and territories of player objects
 	
 	private String name;
+	private String sPlayerColour;
 	private int size = 0;
 	private int numArmy = 36;
 	private int i = 0;
@@ -9,12 +10,14 @@ public class Player {//Player class to set name and territories of player object
 	private String [] territories = new String[50];
 	private Card[] arrayCards = new Card[20];
 
-	public Player(){ 
+	public Player(String colour){ 
+		sPlayerColour = colour;
 	}
 	
-	public Player(String nameInput, int numArmyInput){ 
+	public Player(String nameInput, int numArmyInput,String colour){ 
 		name = nameInput;
 		numArmy = numArmyInput;
+		sPlayerColour = colour;
 	}
 	
 	public void setName(String x){ 
@@ -55,6 +58,12 @@ public class Player {//Player class to set name and territories of player object
 	public String getCard(){
 		String s = arrayCards[i-1].getTerritoryNameCard() + " - " + arrayCards[i-1].getTypeArmy();
 		return s;
+	}
+	public void setColour (String x){
+		sPlayerColour = x;
+	}
+	public String getColour(){
+		return sPlayerColour;
 	}
 }
 
