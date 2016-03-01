@@ -33,12 +33,14 @@ public class RiskGui {
 		command.setBackground(SystemColor.black);
 		frame.add(command, BorderLayout.EAST);
 		background.add(new initialSetUp());
-		frame.add(background, BorderLayout.WEST);
-		background.setOpaque(true);
+		
 		deckOfCards.setBounds(43, 588, 73, 93);
 		deckOfCards.setBackground(Color.yellow.darker());
 		deckOfCards.setForeground(Color.yellow.darker().darker().darker());
-		frame.add(deckOfCards);
+		background.add(deckOfCards);
+		
+		frame.add(background, BorderLayout.WEST);
+				
 		System.out.println(command.player1.printTerritories());
 
 		frame.pack();
