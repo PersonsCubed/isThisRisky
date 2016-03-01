@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+
+
 public class Player {//Player class to set name and territories of player objects
 	
 	private String name;
@@ -6,7 +9,7 @@ public class Player {//Player class to set name and territories of player object
 	private int size = 0;
 	private int numArmy = 36;
 	private int i = 0;
-	Territory territory;
+	private ArrayList<Territory> TerritoriesOwned = new ArrayList<Territory>();
 	private String [] territories = new String[50];
 	private Card[] arrayCards = new Card[20];
 
@@ -24,9 +27,9 @@ public class Player {//Player class to set name and territories of player object
 		name = x;
 	}
 	
-	public void setTerritories(int y, String w){
-		territories[y] = w;
-		territory = new Territory(this.name, 1);
+	public void setTerritories(String sCountryName,int iArrayPosition, int x,int y){
+		territories[iArrayPosition] = sCountryName;
+		TerritoriesOwned.add(new Territory(this.name,sCountryName, 1,x,y));
 		size++;
 	}
 	
@@ -64,6 +67,12 @@ public class Player {//Player class to set name and territories of player object
 	}
 	public String getColour(){
 		return sPlayerColour;
+	}
+	public int iNumberTerritories(){
+		return TerritoriesOwned.size();
+	}
+	public Territory getTerritory(int i){
+		return TerritoriesOwned.get(i);
 	}
 }
 

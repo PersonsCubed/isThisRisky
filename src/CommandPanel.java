@@ -15,6 +15,8 @@ public class CommandPanel extends JPanel {
 	private String sTextDisplayed = "";
 	private String sPlayer_1_name = null;
 	private String sPlayer_2_name = null;
+	private Info1 info1 = new Info1();
+	private Info2 info2 = new Info2();
 
 	private JTextArea textArea = new JTextArea();
 	private JTextPane userInputTextPane = new JTextPane();
@@ -22,18 +24,22 @@ public class CommandPanel extends JPanel {
 	private JLabel ouputLabel = new JLabel();
 
 	// declares 6 object "Player" being 2 user players and 4 neutrals
-	private Player player1 = new Player("#000000");
-	private Player player2 = new Player("#000000");
-	private Player playerN1 = new Player("Mary", 24,"#000000");
-	private Player playerN2 = new Player("John", 24,"#000000");
-	private Player playerN3 = new Player("Ann", 24, "#000000");
-	private Player playerN4 = new Player("Simon", 24,"#000000");
+	public Player player1 = new Player("#000000");
+	public Player player2 = new Player("#ff0000");
+	public Player playerN1 = new Player("Mary", 24,"#ffff00");
+	public Player playerN2 = new Player("John", 24,"#ffc0cb");
+	public Player playerN3 = new Player("Ann", 24, "#000000");
+	public Player playerN4 = new Player("Simon", 24,"#000000");
 
 	// declare array of object Card
 	private Card[] arrayCards = new Card[42];
-
+	
+	public void linkToGraphics(Graphics g){
+		repaint();
+	}
+	
 	public CommandPanel() throws IOException {
-
+		
 		buildLayout();
 
 		userPrompt("\nWelcome to Risk -\nthe World Conquest Game\n\n");
@@ -52,18 +58,17 @@ public class CommandPanel extends JPanel {
 
 		for (int i = 0, j = 9; i < 9; i++) { // loop to assign 9 territories to each of the two user players
 
-			player1.setTerritories(i, allocateTerritories(i));
-			player2.setTerritories(i, allocateTerritories(j));
-
+			player1.setTerritories(allocateTerritories(i),i,info2.getX(i),info2.getY(i));
+			player2.setTerritories(allocateTerritories(j),i,info2.getX(j),info2.getY(j));
 			j++;
 		}
 
 		for (int i = 0, k = 18, l = 24, m = 30, n = 36; i < 6; i++) {// loop to assign 6 territories to
 																	// each of the four neutral players
-			playerN1.setTerritories(i, allocateTerritories(k));
-			playerN2.setTerritories(i, allocateTerritories(l));
-			playerN3.setTerritories(i, allocateTerritories(m));
-			playerN4.setTerritories(i, allocateTerritories(n));
+			playerN1.setTerritories(allocateTerritories(k),i,info2.getX(k),info2.getY(k));
+			playerN2.setTerritories(allocateTerritories(l),i,info2.getX(l),info2.getY(l));
+			playerN3.setTerritories(allocateTerritories(m),i,info2.getX(m),info2.getY(m));
+			playerN4.setTerritories(allocateTerritories(n),i,info2.getX(n),info2.getY(n));
 
 			k++;
 			l++;
@@ -74,9 +79,7 @@ public class CommandPanel extends JPanel {
 	}
 
 	public String allocateTerritories(int i) {
-		Info1 Info = new Info1(); // uses the Info1.java file to access the array of strings storing the list of territories
-		String P = Info.getTerritories(i); // uses the getTerritories method defined in Info1 to get territories names from the array
-		return P;
+		return info1.getTerritories(i); // uses the getTerritories method defined in Info1 to get territories names from the array
 	}
 
 	private Card drawTerritoryCard() { // return random Territory card
@@ -252,7 +255,28 @@ public class CommandPanel extends JPanel {
 						+ player2.printTerritories() + "\n"
 						+ "Total number of armys: " + player2.getNumArmy()
 						+ "\n\n");
-
+				
+				userPrompt(playerN1.getName()
+						+ ", one army was alocated in\neach of the below territories:\n\n"
+						+ playerN1.printTerritories() + "\n"
+						+ "Total number of armys: " + playerN1.getNumArmy()
+						+ "\n\n");
+				userPrompt(playerN2.getName()
+						+ ", one army was alocated in\neach of the below territories:\n\n"
+						+ playerN2.printTerritories() + "\n"
+						+ "Total number of armys: " + playerN2.getNumArmy()
+						+ "\n\n");
+				userPrompt(playerN3.getName()
+						+ ", one army was alocated in\neach of the below territories:\n\n"
+						+ playerN3.printTerritories() + "\n"
+						+ "Total number of armys: " + playerN3.getNumArmy()
+						+ "\n\n");
+				userPrompt(playerN4.getName()
+						+ ", one army was alocated in\neach of the below territories:\n\n"
+						+ playerN4.printTerritories() + "\n"
+						+ "Total number of armys: " + playerN4.getNumArmy()
+						+ "\n\n");
+				repaint();
 				userPrompt("Now " + player1.getName()
 						+ ", draw a card\nfrom the deck:\n\n");
 
@@ -260,6 +284,7 @@ public class CommandPanel extends JPanel {
 				RiskGui.deckOfCards.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						System.out.println("deck active");
 						if (iNumCardsDrawn == 1) {
 							player1.setCard(drawTerritoryCard());
 							userPrompt(player1.getName() + ", you got\n"
@@ -286,12 +311,5 @@ public class CommandPanel extends JPanel {
 				userPrompt("Command invalid");
 			}
 		}
-	}
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D)g;
-		
-		g.setColor(Color.black);
-		g2d.drawLine(0, 0+7,1040,220);
 	}
 }
