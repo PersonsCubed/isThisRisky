@@ -27,8 +27,16 @@ public class Territory { //Current Territory Object class which will be potentia
 	public int getNumArmys(){
 		return iNumArmys;
 	}
+	
+	public void addArmys(int numb){
+		iNumArmys+=numb;
+	}
+	
+	public void substractArmys(int numb){
+		iNumArmys-=numb;
+	}
 
-	public String sGetCountryName() {
+	public String getCountryName() {
 		return sCountryName;
 	}
 

@@ -12,9 +12,11 @@ public class CommandPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private int iNumClicks = 1;
 	private int iNumCardsDrawn = 1;
+	private int iIsThereAny = 0;
 	private String sTextDisplayed = "";
 	private String sPlayer_1_name = null;
 	private String sPlayer_2_name = null;
+	private String sTempTerritoryName = null;
 	private Info1 info1 = new Info1();
 	private Info2 info2 = new Info2();
 
@@ -26,10 +28,10 @@ public class CommandPanel extends JPanel {
 	// declares 6 object "Player" being 2 user players and 4 neutrals
 	public Player player1 = new Player("#000000");
 	public Player player2 = new Player("#ff0000");
-	public Player playerN1 = new Player("Mary", 24,"#ffff00");
-	public Player playerN2 = new Player("John", 24,"#ffc0cb");
-	public Player playerN3 = new Player("Ann", 24, "#000000");
-	public Player playerN4 = new Player("Simon", 24,"#000000");
+	public Player playerN1 = new Player("Mary", 33,"#ffff00");
+	public Player playerN2 = new Player("John", 33,"#ffc0cb");
+	public Player playerN3 = new Player("Ann", 33, "#000000");
+	public Player playerN4 = new Player("Simon", 33,"#000000");
 
 	// declare array of object Card
 	private Card[] arrayCards = new Card[42];
@@ -51,24 +53,24 @@ public class CommandPanel extends JPanel {
 
 		buildCards();
 
-		drawTerritoryCard();
+		drawTerritoryCard();	
 	}
 
 	private void assignTerritories() { // assign territories to user and neutral players
 
 		for (int i = 0, j = 9; i < 9; i++) { // loop to assign 9 territories to each of the two user players
 
-			player1.setTerritories(allocateTerritories(i),i,info2.getX(i),info2.getY(i));
-			player2.setTerritories(allocateTerritories(j),i,info2.getX(j),info2.getY(j));
+			player1.setTerritories(allocateTerritories(i), info2.getX(i),info2.getY(i));
+			player2.setTerritories(allocateTerritories(j), info2.getX(j),info2.getY(j));
 			j++;
 		}
 
 		for (int i = 0, k = 18, l = 24, m = 30, n = 36; i < 6; i++) {// loop to assign 6 territories to
 																	// each of the four neutral players
-			playerN1.setTerritories(allocateTerritories(k),i,info2.getX(k),info2.getY(k));
-			playerN2.setTerritories(allocateTerritories(l),i,info2.getX(l),info2.getY(l));
-			playerN3.setTerritories(allocateTerritories(m),i,info2.getX(m),info2.getY(m));
-			playerN4.setTerritories(allocateTerritories(n),i,info2.getX(n),info2.getY(n));
+			playerN1.setTerritories(allocateTerritories(k), info2.getX(k),info2.getY(k));
+			playerN2.setTerritories(allocateTerritories(l), info2.getX(l),info2.getY(l));
+			playerN3.setTerritories(allocateTerritories(m), info2.getX(m),info2.getY(m));
+			playerN4.setTerritories(allocateTerritories(n), info2.getX(n),info2.getY(n));
 
 			k++;
 			l++;
@@ -207,9 +209,7 @@ public class CommandPanel extends JPanel {
 
 	}
 
-	public void userPrompt(String prompt) { // builds an string with all game's
-											// outputs so far and displays it at
-											// the JTextArea
+	public void userPrompt(String prompt) { // builds an string with all game's outputs so far and displays it at the JTextArea
 		sTextDisplayed += prompt + "\n";
 		textArea.setText(sTextDisplayed);
 	}
@@ -222,8 +222,7 @@ public class CommandPanel extends JPanel {
 			// it assigns the string entered to player 1,
 			// display greeting message and asks for the next player's name
 
-			if (iNumClicks == 1
-					&& ((sPlayer_1_name = userInputTextPane.getText()).length() > 0)) {
+			if (iNumClicks == 1 && ((sPlayer_1_name = userInputTextPane.getText()).length() > 0)) {
 				sPlayer_1_name = userInputTextPane.getText();
 				userInputTextPane.setText("");
 				player1.setName(sPlayer_1_name);
@@ -237,8 +236,7 @@ public class CommandPanel extends JPanel {
 			// display greeting messages and the territories allocated for each
 			// of the user players
 
-			else if (iNumClicks == 2
-					&& ((sPlayer_2_name = userInputTextPane.getText()).length() > 0)) {
+			else if (iNumClicks == 2 && ((sPlayer_2_name = userInputTextPane.getText()).length() > 0) && sPlayer_1_name!=sPlayer_2_name ) {
 
 				userInputTextPane.setText("");
 				player2.setName(sPlayer_2_name);
@@ -254,31 +252,12 @@ public class CommandPanel extends JPanel {
 						+ ", one army was alocated in\neach of the below territories:\n\n"
 						+ player2.printTerritories() + "\n"
 						+ "Total number of armys: " + player2.getNumArmy()
-						+ "\n\n");
+						+ "\n\n" + "              *****************");
 				
-				userPrompt(playerN1.getName()
-						+ ", one army was alocated in\neach of the below territories:\n\n"
-						+ playerN1.printTerritories() + "\n"
-						+ "Total number of armys: " + playerN1.getNumArmy()
-						+ "\n\n");
-				userPrompt(playerN2.getName()
-						+ ", one army was alocated in\neach of the below territories:\n\n"
-						+ playerN2.printTerritories() + "\n"
-						+ "Total number of armys: " + playerN2.getNumArmy()
-						+ "\n\n");
-				userPrompt(playerN3.getName()
-						+ ", one army was alocated in\neach of the below territories:\n\n"
-						+ playerN3.printTerritories() + "\n"
-						+ "Total number of armys: " + playerN3.getNumArmy()
-						+ "\n\n");
-				userPrompt(playerN4.getName()
-						+ ", one army was alocated in\neach of the below territories:\n\n"
-						+ playerN4.printTerritories() + "\n"
-						+ "Total number of armys: " + playerN4.getNumArmy()
-						+ "\n\n");
 				repaint();
-				userPrompt("Now " + player1.getName()
-						+ ", draw a card\nfrom the deck:\n\n");
+				
+				userPrompt(player1.getName()
+						+ ", draw a card\nfrom the deck:\n");
 
 				// activates deckOfCards button
 				RiskGui.deckOfCards.addActionListener(new ActionListener() {
@@ -289,27 +268,85 @@ public class CommandPanel extends JPanel {
 							player1.setCard(drawTerritoryCard());
 							userPrompt(player1.getName() + ", you got\n"
 									+ player1.getCard() + "\n\n");
-							userPrompt("Now " + player2.getName()
+							userPrompt(player2.getName()
 									+ ", draw a card\nfrom the deck:\n\n");
 							iNumCardsDrawn++;
 						} else if (iNumCardsDrawn == 2) {
 							player2.setCard(drawTerritoryCard());
 							userPrompt(player2.getName() + ", you got\n"
-									+ player2.getCard() + "\n\n");
+									+ player2.getCard() + "\n\n" + "              *****************\n");
 							iNumCardsDrawn++;
+							
+							userPrompt(player1.getName() + " type the territory namewhere 3\nof your armys will be placed:\n ");
 						}
 					}
 				});
 
 				iNumClicks++;
 			}
-
-			// if an invalid command is entered to the TextPane, it displays
-			// "Command invalid" message
-			else if ((userInputTextPane.getText().length()) > 0) {
-				userInputTextPane.setText("");
-				userPrompt("Command invalid");
+			
+			//users take turn to place 3 armies in a territory
+			
+			else if (iNumClicks>=3 && iNumClicks<28){
+					
+				sTempTerritoryName = userInputTextPane.getText();
+				
+				//player 1 turn
+				if (iNumClicks%2 == 1 && sTempTerritoryName.length() > 0) {
+						
+					compareTerritoryName(player1);						
+						
+					if(iIsThereAny==1){
+						userPrompt(player2.getName() + " type the territory name where 3\nof your armys will be placed:\n ");					
+					}
+				}
+				
+				//player 2 turn
+				else if (iNumClicks%2 == 0	&& sTempTerritoryName.length() > 0) {
+					
+					compareTerritoryName(player2);								
+												
+					if(iNumClicks<27 && iIsThereAny==1){
+						userPrompt(player1.getName() + " type the territory namewhere 3\nof your armys will be placed:\n ");
+					}
+					else if(iNumClicks==27){
+						userPrompt("All armies have now been allocated!\n ");
+					}
+				}				
 			}
 		}
 	}
-}
+
+	private void compareTerritoryName(Player player) { //checks if territory name typed by user is valid
+			
+		int temp=0;
+		iIsThereAny=0;
+		userPrompt(+iIsThereAny+"\n");
+		for(int i=0; i<player.iNumberTerritories(); i++){
+			if(sTempTerritoryName.equalsIgnoreCase(player.getTerritory(i).getCountryName().substring(0, sTempTerritoryName.length()))){						
+				iIsThereAny++;
+				temp=i;
+			}
+		}
+			
+		if(iIsThereAny==1){ //if only one result is found (expected)
+			player.getTerritory(temp).addArmys(3);
+			userPrompt(player.getTerritory(temp).getCountryName() + " has now " + player.getTerritory(temp).getNumArmys() + " armys.\n");
+			iNumClicks++;		
+			userInputTextPane.setText("");
+		}
+			
+		else if(iIsThereAny>1){ //if more than one result is found therefore name typed is ambiguous 
+			userPrompt("Territory is abiguos,\nplease enter a valid territory name:\n");
+			userInputTextPane.setText("");
+			sTempTerritoryName = userInputTextPane.getText();
+		}
+			
+		else{ //if no result was found
+			userPrompt("Territory could not be found,\nplease enter a valid territory name:\n");
+			userInputTextPane.setText("");
+			sTempTerritoryName = userInputTextPane.getText();
+		}											
+	}
+		
+	}

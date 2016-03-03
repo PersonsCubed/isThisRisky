@@ -6,11 +6,10 @@ public class Player {//Player class to set name and territories of player object
 	
 	private String name;
 	private String sPlayerColour;
-	private int size = 0;
-	private int numArmy = 36;
+	private int numTerritories = 0;
+	private int numArmy = 45;
 	private int i = 0;
 	private ArrayList<Territory> TerritoriesOwned = new ArrayList<Territory>();
-	private String [] territories = new String[50];
 	private Card[] arrayCards = new Card[20];
 
 	public Player(String colour){ 
@@ -27,10 +26,9 @@ public class Player {//Player class to set name and territories of player object
 		name = x;
 	}
 	
-	public void setTerritories(String sCountryName,int iArrayPosition, int x,int y){
-		territories[iArrayPosition] = sCountryName;
+	public void setTerritories(String sCountryName,int x,int y){
 		TerritoriesOwned.add(new Territory(this.name,sCountryName, 1,x,y));
-		size++;
+		numTerritories++;
 	}
 	
 	public int getNumArmy(){
@@ -41,8 +39,8 @@ public class Player {//Player class to set name and territories of player object
 		
 		String allTerritories = "";
 		
-		for(int i=0; i<size; i++){
-			allTerritories += territories[i] + "\n";
+		for(i=0; i<numTerritories; i++){
+			allTerritories += TerritoriesOwned.get(i).getCountryName() + "\n";
 		}
 		
 		return allTerritories;

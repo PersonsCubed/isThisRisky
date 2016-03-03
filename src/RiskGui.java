@@ -140,16 +140,7 @@ public class RiskGui {
 
 				g.fillOval(info2.getX(i), info2.getY(i), 25, 25);
 				g.setColor(Color.white);
-				g.drawString("1", info2.getX(i), info2.getY(i)); // draws
-																	// the
-																	// number
-																	// 1(1
-																	// army
-																	// for
-																	// start)
-																	// in
-																	// the
-																	// nodes
+				g.drawString("1", info2.getX(i), info2.getY(i)); // draws the number 1(1 army for start) in the nodes
 
 				g.setColor(Color.black);
 				g.setFont(new Font("Helvetica", Font.BOLD, 12));

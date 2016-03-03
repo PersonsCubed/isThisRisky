@@ -9,7 +9,7 @@ public class Info2 {
 	public static final int[] CONTINENT_VALUES = { 5, 5, 7, 2, 2, 3 };
 	private static final int FRAME_WIDTH = 1000; // must be even
 	private static final int FRAME_HEIGHT = 600;
-	private static final int[][] COUNTRY_COORD = {
+	static final int[][] COUNTRY_COORD = {
 			{ 240, 250 },	// ontario
 			{ 235, 190 },   // quebec
 			{ 145, 180},    // nw teritory
