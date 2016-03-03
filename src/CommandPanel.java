@@ -155,13 +155,14 @@ public class CommandPanel extends JPanel {
 						
 						userPrompt("All armies have now been allocated!\n ");
 						
-						
+						/*
+						//test to see if territories were alocated properly
 						printInfo(player1);
 						printInfo(player2);
 						printInfo(playerN1);
 						printInfo(playerN2);
 						printInfo(playerN3);
-						printInfo(playerN4);
+						printInfo(playerN4);*/
 					}
 				}				
 			}
@@ -366,10 +367,11 @@ public class CommandPanel extends JPanel {
 		}											
 	}
 	
-	public void printInfo(Player player){
+	public void printInfo(Player player){ //test the allocation of territories
 		for(int i=0; i<player.iNumberTerritories(); i++){
 			System.out.println(player.getTerritory(i).getCountryName() + " no army: " + player.getTerritory(i).getNumArmys() + " " + player.getTerritory(i).getControllingName());
 		}
+		System.out.println("\n\n");
 	}
 }
 		
