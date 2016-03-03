@@ -9,20 +9,20 @@ public class Info2 {
 	public static final int[] CONTINENT_VALUES = { 5, 5, 7, 2, 2, 3 };
 	private static final int FRAME_WIDTH = 1000; // must be even
 	private static final int FRAME_HEIGHT = 600;
-	static final int[][] COUNTRY_COORD = {
+	private static final int[][] COUNTRY_COORD = {
 			{ 240, 250 },	// ontario
 			{ 235, 190 },   // quebec
 			{ 145, 180},    // nw teritory
 			{ 180, 250 },   // alberta
 			{ 360, 110 },   // grenland
 			{ 250, 320 },   // e usa
-			{ 170, 300 },   // w usa
+			{ 180, 310 },   // w usa
 			{ 200, 350 },   // central america
 			{ 70, 190 },    // namerica alaska
 			{ 470, 260 },   // europe britain
-			{ 480, 320 },   // west europe			                10
+			{ 495, 320 },   // west europe			                10
 			{ 560, 310 },   // europe south europe
-			{ 600, 245 },   // europe ukraine
+			{ 600, 260 },   // europe ukraine
 			{ 540, 280 },   // europe north europe
 			{ 470, 195 },   // europe iceland
 			{ 540, 216 },   // europe scandanavia

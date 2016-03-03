@@ -1,39 +1,43 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
 import javax.swing.*;
-
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
 public class RiskGui {
-	public JFrame frame = new JFrame("Risk");
+	
+	public JFrame frame = new JFrame("Risk");	
 	public static JButton deckOfCards = new JButton("Cards");
 	public static JButton dice = new JButton();
+<<<<<<< HEAD
 	private CommandPanel command = new CommandPanel();
 	private boolean bSwitcher = false;
+=======
+>>>>>>> a1234df69c79a67863dd39057042f2032fe6f025
 
+	
 	public RiskGui() throws IOException {
 		initialize(null);
 	}
-
-	public void initialize(Graphics g) throws IOException {
+	
+	private void initialize(Graphics g) throws IOException {
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setLayout(new BorderLayout());
 		frame.setVisible(true);
-
+		
+		
+		Container contentPane = frame.getContentPane();
+		
 		File file = new File("Map.jpg");
 		BufferedImage img = ImageIO.read(file);
 		Image ReImage = img.getScaledInstance(frame.getWidth() - 320,
 				frame.getHeight(), Image.SCALE_SMOOTH);
-		JLabel background = new JLabel(new ImageIcon(ReImage));
-
-		command.setBackground(SystemColor.black);
-		frame.add(command, BorderLayout.EAST);
-		background.add(new initialSetUp());
+		JLabel background=new JLabel(new ImageIcon(ReImage));
+		background.setOpaque(true);
+		contentPane.add(background, BorderLayout.WEST);
 		
 		dice.setBorderPainted(false);
 		dice.setBorder(null);
@@ -44,6 +48,7 @@ public class RiskGui {
 		//img1.setResizable(false);
 		dice.setIcon(new ImageIcon(img1));
 		
+<<<<<<< HEAD
 		deckOfCards.setBounds(43, 588, 73, 93);
 		deckOfCards.setBackground(Color.yellow.darker());
 		deckOfCards.setForeground(Color.yellow.darker().darker().darker());
@@ -52,26 +57,45 @@ public class RiskGui {
 		dice.setBackground(Color.white);
 		dice.setForeground(Color.white.darker());
 		background.add(dice);
+=======
+		deckOfCards.setBounds(43,588,73,93);
+		deckOfCards.setBackground(Color.yellow.darker());
+		deckOfCards.setForeground(Color.yellow.darker().darker().darker());
+>>>>>>> a1234df69c79a67863dd39057042f2032fe6f025
 		
+		dice.setBounds(700,580,90,90);
+		dice.setBackground(Color.white);
+		dice.setForeground(Color.white.darker());
+
+
+		frame.add(deckOfCards);
+		frame.add(dice);
+
+		background.setOpaque(true);
+		frame.add(new MyComponent());
 		frame.add(background, BorderLayout.WEST);
-				
-		System.out.println(command.player1.printTerritories());
-
+		CommandPanel command = new CommandPanel();
+		command.setBackground(SystemColor.black);
+		frame.add(command);
+		
 		frame.pack();
-	}
-
+		
+	}	
+		
 	@SuppressWarnings("serial")
-	public class initialSetUp extends JPanel {
-		Info2 info2 = new Info2();
+	class MyComponent extends JPanel {
+		Info2 info = new Info2();
 		Info1 info1 = new Info1();
 
-		public initialSetUp() {
-			setBounds(0, 0, 1800, 1010);
-			setOpaque(false);
-		}
-
-		@SuppressWarnings("static-access")
+	   
+		public MyComponent() {
+	    	setBounds(0,0,1800,1010);
+	    	setOpaque(false);
+	    }
+		
+	    @SuppressWarnings("static-access")
 		public void paintComponent(Graphics g) {
+<<<<<<< HEAD
 			int temp;
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D) g;
@@ -220,5 +244,72 @@ public class RiskGui {
 			}
 			bSwitcher = true;
 		}
+=======
+	    	
+	    	int temp ;
+	       
+	    	super.paintComponent(g);       
+	        
+	    	for(int i=0;i<42;i++){
+	        
+	    		g.setColor(Color.black);
+	            g.setFont( new Font("Helvetica", Font.BOLD, 12) );
+	            g.drawString(info1.getName(i), (info.getX(i)+10), info.getY(i));
+	        	
+	            if(i<=8) g.setColor(Color.black);
+	        	else if(i>8 &&i<16) g.setColor(Color.yellow);
+	        	else if(i>15 &&i<28) g.setColor(Color.white);
+	        	else if(i>27 && i<32) g.setColor(Color.blue);
+	        	else if(i>31 && i<36) g.setColor(Color.red);
+	        	else if(i>35 && i<42) g.setColor(Color.green);
+	           	     
+	          //draws line between two points	
+	            for(int j=0; j<(info1.ADJACENT[i]).length; j++){ 	            	
+	    			temp = info1.ADJACENT[i][j];	
+	    			g.drawLine(info.getX(i)+10, info.getY(i)+7, info.getX(temp)+10, info.getY(temp)+7);
+	    		}
+	    	}
+	            for(int i=0;i<42;i++){
+		            if(i<=8) g.setColor(Color.red);
+		        	else if(i>8 &&i<16) g.setColor(Color.green);
+		        	else if(i>15 &&i<28) g.setColor(Color.blue);
+		        	else if(i>27 && i<32) g.setColor(Color.yellow);
+		        	else if(i>31 && i<36) g.setColor(Color.black);
+		        	else if(i>35 && i<42) g.setColor(Color.pink);
+		        	
+		            g.fillOval(info.getX(i),info.getY(i) , 20, 20);
+		            
+		            g.setColor(Color.white);
+		            g.drawString("1", info.getX(i)+7, info.getY(i)+14); //draws the number 1(1 army for start) in the nodes
+	            }
+	           
+	            //draw deck of cards
+	            g.setColor(Color.yellow.darker());
+                g.fillRect(25,600,80,100);
+                g.setColor(Color.white);
+                g.drawRect(28,603,73,93);
+                g.drawRect(29,604,71,91);
+                
+                g.setColor(Color.yellow.darker());
+                g.fillRect(30,595,80,100);
+                g.setColor(Color.yellow.darker().darker().darker());
+                g.drawRect(33,598,73,93);
+                g.drawRect(34,599,71,91);
+                
+                g.setColor(Color.yellow.darker());
+                g.fillRect(35,590,80,100);
+                g.setColor(Color.white);
+                g.drawRect(38,593,73,93);
+                g.drawRect(39,594,71,91);
+                
+                g.setColor(Color.yellow.darker());
+                g.fillRect(40,585,80,100);
+                g.setColor(Color.yellow.darker().darker().darker());
+                g.drawRect(43,588,73,93);
+                g.drawRect(44,589,71,91);
+                g.drawString("CARDS", 60, 640);
+
+	    }
+>>>>>>> a1234df69c79a67863dd39057042f2032fe6f025
 	}
 }
