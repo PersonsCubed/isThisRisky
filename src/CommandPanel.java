@@ -45,12 +45,9 @@ public class CommandPanel extends JPanel {
 
 		userInputButton.addActionListener(new addAction());
 
-		assignTerritories();
-
 		buildCards();
 
 		drawTerritoryCard();
-		
 	}
 		
 	class addAction implements ActionListener { // implements actions to the
@@ -80,6 +77,8 @@ public class CommandPanel extends JPanel {
 				userInputTextPane.setText("");
 				player2.setName(sPlayer_2_name);
 				userPrompt("Hi " + sPlayer_2_name + "!\n\nNow let's play!\n\n");
+				
+				assignTerritories();
 
 				userPrompt(player1.getName()
 						+ ", one army was alocated in\neach of the below territories:\n\n"
@@ -155,6 +154,14 @@ public class CommandPanel extends JPanel {
 						setNeutralsTerritories(playerN4);
 						
 						userPrompt("All armies have now been allocated!\n ");
+						
+						
+						printInfo(player1);
+						printInfo(player2);
+						printInfo(playerN1);
+						printInfo(playerN2);
+						printInfo(playerN3);
+						printInfo(playerN4);
 					}
 				}				
 			}
@@ -194,14 +201,14 @@ public class CommandPanel extends JPanel {
 		repaint();
 	}
 
-	private Card drawTerritoryCard() { // return random Territory card
+	public Card drawTerritoryCard() { // return random Territory card
 
 		Random rand = new Random();
 
 		return arrayCards[rand.nextInt(41) + 0];
 	}
 
-	private void buildCards() { // build 42 object cards containing name of territory and type of army
+	public void buildCards() { // build 42 object cards containing name of territory and type of army
 
 		arrayCards[0] = new Card(Info1.COUNTRY_NAMES[0], "Cavalry");
 		arrayCards[1] = new Card(Info1.COUNTRY_NAMES[1], "Artillery");
@@ -248,7 +255,7 @@ public class CommandPanel extends JPanel {
 
 	}
 
-	private void buildLayout() { // sets the layout of main JPanel and its components
+	public void buildLayout() { // sets the layout of main JPanel and its components
 
 		Dimension size = getPreferredSize();
 		size.width = 320;
@@ -320,14 +327,14 @@ public class CommandPanel extends JPanel {
 		textArea.setText(sTextDisplayed);
 	}
 
-	private void setNeutralsTerritories(Player neutralPlayer) { //allocate armies to neutral's territories
+	public void setNeutralsTerritories(Player neutralPlayer) { //allocate armies to neutral's territories
 		for(int i=0; i<27; i++){
 			Random rand = new Random(); 	
-			neutralPlayer.getTerritory(rand.nextInt(7)).addArmys(1);
+			neutralPlayer.getTerritory(rand.nextInt(6)).addArmys(1);
 		}		
 	}
 
-	private void compareTerritoryName(Player player) { //checks if territory name typed by user is valid
+	public void compareTerritoryName(Player player) { //checks if territory name typed by user is valid
 		
 		int temp=0;
 		iIsThereAny=0;
@@ -357,6 +364,12 @@ public class CommandPanel extends JPanel {
 			userInputTextPane.setText("");
 			sTempTerritoryName = userInputTextPane.getText();
 		}											
+	}
+	
+	public void printInfo(Player player){
+		for(int i=0; i<player.iNumberTerritories(); i++){
+			System.out.println(player.getTerritory(i).getCountryName() + " no army: " + player.getTerritory(i).getNumArmys() + " " + player.getTerritory(i).getControllingName());
+		}
 	}
 }
 		
