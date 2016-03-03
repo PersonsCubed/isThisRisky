@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 public class RiskGui {
 	public JFrame frame = new JFrame("Risk");
 	public static JButton deckOfCards = new JButton("Cards");
+	public static JButton dice = new JButton();
 	private CommandPanel command = new CommandPanel();
 	private boolean bSwitcher = false;
 
@@ -34,10 +35,23 @@ public class RiskGui {
 		frame.add(command, BorderLayout.EAST);
 		background.add(new initialSetUp());
 		
+		dice.setBorderPainted(false);
+		dice.setBorder(null);
+		dice.setMargin(new Insets(0, 0, 0, 0));
+		dice.setContentAreaFilled(false);
+		File file1 = new File("animated-dice-image-0005.gif");
+		BufferedImage img1= ImageIO.read(file1);
+		//img1.setResizable(false);
+		dice.setIcon(new ImageIcon(img1));
+		
 		deckOfCards.setBounds(43, 588, 73, 93);
 		deckOfCards.setBackground(Color.yellow.darker());
 		deckOfCards.setForeground(Color.yellow.darker().darker().darker());
 		background.add(deckOfCards);
+		dice.setBounds(700,580,90,90);
+		dice.setBackground(Color.white);
+		dice.setForeground(Color.white.darker());
+		background.add(dice);
 		
 		frame.add(background, BorderLayout.WEST);
 				
@@ -61,7 +75,6 @@ public class RiskGui {
 			int temp;
 			super.paintComponent(g);
 			Graphics2D g2d = (Graphics2D) g;
-			command.linkToGraphics(g);
 			g2d.setStroke(new BasicStroke(2));
 
 			for (int i = 0; i < 42; i++) { // code for node edges
@@ -175,32 +188,32 @@ public class RiskGui {
 
 			if (bSwitcher == true) {
 				for (int i = ((command.player1.iNumberTerritories())-1); i > 0; i--) {
-					g.setColor(Color.decode(command.player1.getColour()));
+					g.setColor(Color.decode(command.player1.getHexColour()));
 					g.fillOval(command.player1.getTerritory(i).iGetXT(),
 							command.player1.getTerritory(i).iGetYT(), 15, 15);
 				}
 				for (int i = ((command.player2.iNumberTerritories())-1); i > 0; i--) {
-					g.setColor(Color.decode(command.player2.getColour()));
+					g.setColor(Color.decode(command.player2.getHexColour()));
 					g.fillOval(command.player2.getTerritory(i).iGetXT(),
 							command.player2.getTerritory(i).iGetYT(), 15, 15);
 				}
 				for (int i = ((command.playerN1.iNumberTerritories())-1); i > 0; i--) {
-					g.setColor(Color.decode(command.playerN1.getColour()));
+					g.setColor(Color.decode(command.playerN1.getHexColour()));
 					g.fillOval(command.playerN1.getTerritory(i).iGetXT(),
 							command.playerN1.getTerritory(i).iGetYT(), 15, 15);
 				}
 				for (int i = ((command.playerN2.iNumberTerritories())-1); i > 0; i--) {
-					g.setColor(Color.decode(command.playerN2.getColour()));
+					g.setColor(Color.decode(command.playerN2.getHexColour()));
 					g.fillOval(command.playerN2.getTerritory(i).iGetXT(),
 							command.playerN2.getTerritory(i).iGetYT(), 15, 15);
 				}
 				for (int i = ((command.playerN3.iNumberTerritories())-1); i > 0; i--) {
-					g.setColor(Color.decode(command.playerN3.getColour()));
+					g.setColor(Color.decode(command.playerN3.getHexColour()));
 					g.fillOval(command.playerN3.getTerritory(i).iGetXT(),
 							command.playerN3.getTerritory(i).iGetYT(), 15, 15);
 				}
 				for (int i = ((command.playerN4.iNumberTerritories())-1); i > 0; i--) {
-					g.setColor(Color.decode(command.playerN4.getColour()));
+					g.setColor(Color.decode(command.playerN4.getHexColour()));
 					g.fillOval(command.playerN4.getTerritory(i).iGetXT(),
 							command.playerN4.getTerritory(i).iGetYT(), 15, 15);
 				}

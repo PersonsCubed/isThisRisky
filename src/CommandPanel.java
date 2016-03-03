@@ -12,11 +12,17 @@ public class CommandPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private int iNumClicks = 1;
 	private int iNumCardsDrawn = 1;
+	private int iNumDiceRolled=1;
+	private int P1roll;
+	private int P2roll;
 	private int iIsThereAny = 0;
 	private String sTextDisplayed = "";
+	private Player GoesFirst;
+	private Player GoesSecond;
+
 	private String sPlayer_1_name = null;
 	private String sPlayer_2_name = null;
-	private String sTempTerritoryName = null;
+	private String sTempTerritoryName;
 	private Info1 info1 = new Info1();
 	private Info2 info2 = new Info2();
 
@@ -26,12 +32,12 @@ public class CommandPanel extends JPanel {
 	private JLabel ouputLabel = new JLabel();
 
 	// declares 6 object "Player" being 2 user players and 4 neutrals
-	public Player player1 = new Player("#000000");
-	public Player player2 = new Player("#ff0000");
-	public Player playerN1 = new Player("Mary", 33,"#ffff00");
-	public Player playerN2 = new Player("John", 33,"#ffc0cb");
-	public Player playerN3 = new Player("Ann", 33, "#000000");
-	public Player playerN4 = new Player("Simon", 33,"#000000");
+	public Player player1 = new Player();
+	public Player player2 = new Player();
+	public Player playerN1 = new Player("Mary", 33);
+	public Player playerN2 = new Player("John", 33);
+	public Player playerN3 = new Player("Ann", 33);
+	public Player playerN4 = new Player("Simon", 33);
 
 	// declare array of object Card
 	private Card[] arrayCards = new Card[42];
@@ -62,7 +68,9 @@ public class CommandPanel extends JPanel {
 				sPlayer_1_name = userInputTextPane.getText();
 				userInputTextPane.setText("");
 				player1.setName(sPlayer_1_name);
+				String sP1Colour=player1.setColour();
 				userPrompt("Hi " + sPlayer_1_name + "!\n");
+				userPrompt("You have been allocated the colour " +sP1Colour+ "!\n");
 				userPrompt("Player 2, Enter your name:");
 				iNumClicks++;
 			}
@@ -76,7 +84,9 @@ public class CommandPanel extends JPanel {
 
 				userInputTextPane.setText("");
 				player2.setName(sPlayer_2_name);
-				userPrompt("Hi " + sPlayer_2_name + "!\n\nNow let's play!\n\n");
+				String sP2Colour=player2.setColour();
+				userPrompt("Hi " + sPlayer_2_name + "\n\nYou have been allocated the colour " +sP2Colour+ "!\n" );
+	            userPrompt("Now lets lay!\n\n");
 				
 				assignTerritories();
 
@@ -101,7 +111,6 @@ public class CommandPanel extends JPanel {
 				RiskGui.deckOfCards.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						System.out.println("deck active");
 						if (iNumCardsDrawn == 1) {
 							player1.setCard(drawTerritoryCard());
 							userPrompt(player1.getName() + ", you got\n"
@@ -113,39 +122,77 @@ public class CommandPanel extends JPanel {
 							player2.setCard(drawTerritoryCard());
 							userPrompt(player2.getName() + ", you got\n"
 									+ player2.getCard() + "\n\n" + "              *****************\n");
+	                		userPrompt("Roll dice to see who places their infantry first!\n\n" +player1.getName()+": Roll your dice!\n");
+
 							iNumCardsDrawn++;
 							
-							userPrompt(player1.getName() + " type the territory namewhere 3\nof your armys will be placed:\n ");
+							//userPrompt(player1.getName() + " type the territory namewhere 3\nof your armys will be placed:\n ");
 						}
 					}
+				});
+				  RiskGui.dice.addActionListener(new ActionListener() {
+		                @Override
+		                public void actionPerformed(ActionEvent e) {
+		                	if(iNumDiceRolled==1){
+		                		P1roll=RollDice();
+		                		userPrompt("You got "+P1roll+"\n\n"); 
+		                		RiskGui.dice.setIcon(new ImageIcon("diceFace"+P1roll+".jpg"));
+		                		userPrompt(player2.getName()+": Roll your dice!\n");
+		                		iNumDiceRolled++;
+		                	}
+		                	else if(iNumDiceRolled==2){
+		                		P2roll=RollDice();
+		                		userPrompt("You got "+P2roll+"\n\n"); 
+		                		RiskGui.dice.setIcon(new ImageIcon("diceFace"+P2roll+".jpg"));
+		                		iNumDiceRolled++;
+		                	
+		                	if((iNumDiceRolled==3)&&(P1roll==P2roll)){
+		                		userPrompt("Looks like a draw!\nPlayers must roll again:\n"); 
+		                		iNumDiceRolled=1;
+		                    	userPrompt("Roll dice to see who places their infantry first!\n\n" +player1.getName()+": Roll your dice!\n");
+		                	}
+		                	else if((iNumDiceRolled==3)&&(P1roll>P2roll)){
+		                		GoesFirst=player1;
+		                		GoesSecond=player2;
+		                		userPrompt(player1.getName()+" wins! Allocate your territories first\n\n"); 
+		        				userPrompt(player1.getName() + " type the territory name where 3\nof your armys will be placed:\n ");
+		                		iNumDiceRolled++;
+		                	}
+		                	
+		                	else if((iNumDiceRolled==3)&&(P1roll<P2roll)){
+		                		GoesFirst=player2;
+		                		GoesSecond=player1;
+		                		userPrompt(player2.getName()+" wins! Allocate your territories first\n\n"); 
+		        				userPrompt(player2.getName() + " type the territory namewhere 3\nof your armys will be placed:\n ");
+		        				iNumDiceRolled++;
+		                	}
+		                	}
+		            }
+		                
 				});
 
 				iNumClicks++;
 			}
 			
+	
 			//users take turn to place 3 armies in a territory
 			
 			else if (iNumClicks>=3 && iNumClicks<28){
-					
 				sTempTerritoryName = userInputTextPane.getText();
-				
 				//player 1 turn
 				if (iNumClicks%2 == 1 && sTempTerritoryName.length() > 0) {
-						
-					compareTerritoryName(player1);						
-						
+					compareTerritoryName(GoesFirst);						
 					if(iIsThereAny==1){
-						userPrompt(player2.getName() + " type the territory name where 3\nof your armys will be placed:\n ");					
+						userPrompt(GoesSecond.getName() + " type the territory name where 3\nof your armys will be placed:\n ");					
 					}
 				}
 				
 				//player 2 turn
 				else if (iNumClicks%2 == 0	&& sTempTerritoryName.length() > 0) {
-					
-					compareTerritoryName(player2);								
+					compareTerritoryName(GoesSecond);								
 												
 					if(iNumClicks<27 && iIsThereAny==1){
-						userPrompt(player1.getName() + " type the territory namewhere 3\nof your armys will be placed:\n ");
+						userPrompt(GoesFirst.getName() + " type the territory namewhere 3\nof your armys will be placed:\n ");
 					}
 					else if(iNumClicks==27){
 						setNeutralsTerritories(playerN1);
@@ -154,15 +201,6 @@ public class CommandPanel extends JPanel {
 						setNeutralsTerritories(playerN4);
 						
 						userPrompt("All armies have now been allocated!\n ");
-						
-						/*
-						//test to see if territories were alocated properly
-						printInfo(player1);
-						printInfo(player2);
-						printInfo(playerN1);
-						printInfo(playerN2);
-						printInfo(playerN3);
-						printInfo(playerN4);*/
 					}
 				}				
 			}
@@ -198,15 +236,24 @@ public class CommandPanel extends JPanel {
 		return info1.getTerritories(i); // uses the getTerritories method defined in Info1 to get territories names from the array
 	}
 	
-	public void linkToGraphics(Graphics g){
-		repaint();
+	public Card drawTerritoryCard(){
+		 //return random colour from the array of possible colours, makes the array smaller to avoid repeating colours.
+			Random randNum = new Random();
+			int index=randNum.nextInt(arrayCards.length);
+			Card delete=arrayCards[index];
+			arrayCards=removeListElements(arrayCards,delete);
+			return delete;		
 	}
-
-	public Card drawTerritoryCard() { // return random Territory card
-
-		Random rand = new Random();
-
-		return arrayCards[rand.nextInt(41) + 0];
+	public Card[] removeListElements(Card arrayCards2 [], Card delete){
+		Card result[] = new Card[(arrayCards2.length)-1];
+		int j=0;
+		for(int i=0; i<arrayCards2.length;i++){
+			if(arrayCards2[i]!=delete){
+				result[j]=arrayCards2[i];
+				j++;
+			}
+		}
+		return result;
 	}
 
 	public void buildCards() { // build 42 object cards containing name of territory and type of army
@@ -340,8 +387,8 @@ public class CommandPanel extends JPanel {
 		int temp=0;
 		iIsThereAny=0;
 
-		for(int i=0; i<player.iNumberTerritories(); i++){
-			if(sTempTerritoryName.equalsIgnoreCase(player.getTerritory(i).getCountryName().substring(0, sTempTerritoryName.length()))){						
+		for(int i=0; i<(player.iNumberTerritories()); i++){
+			if(sTempTerritoryName.equalsIgnoreCase(player.getTerritory(i).getCountryName())){	
 				iIsThereAny++;
 				temp=i;
 			}
@@ -350,6 +397,7 @@ public class CommandPanel extends JPanel {
 		if(iIsThereAny==1){ //if only one result is found (expected)
 			player.getTerritory(temp).addArmys(3);
 			userPrompt(player.getTerritory(temp).getCountryName() + " has now " + player.getTerritory(temp).getNumArmys() + " armys.\n");
+			sTempTerritoryName=null;
 			iNumClicks++;		
 			userInputTextPane.setText("");
 		}
@@ -358,12 +406,14 @@ public class CommandPanel extends JPanel {
 			userPrompt("Territory is abiguos,\nplease enter a valid territory name:\n");
 			userInputTextPane.setText("");
 			sTempTerritoryName = userInputTextPane.getText();
+			sTempTerritoryName=null;
 		}
 		
 		else{ //if no result was found
 			userPrompt("Territory could not be found,\nplease enter a valid territory name:\n");
 			userInputTextPane.setText("");
 			sTempTerritoryName = userInputTextPane.getText();
+			sTempTerritoryName=null;
 		}											
 	}
 	
@@ -373,5 +423,13 @@ public class CommandPanel extends JPanel {
 		}
 		System.out.println("\n\n");
 	}
+	public int RollDice(){
+		int result;
+		Random randNum = new Random();
+		result=randNum.nextInt(5)+1;//number between 1 and 6
+		return result;
+		
+	}
+
 }
 		

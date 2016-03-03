@@ -1,26 +1,59 @@
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Player {//Player class to set name and territories of player objects
 	
 	private String name;
 	private String sPlayerColour;
+	private static String [] ColourList={ "red", "blue", "green", "yellow", "pink", "white"};
+	private static String [] ColourListhex={ "#DC143C", "#4682B4", "#3CB371", "#FFFF00", "#FF1493", "#FFFFF0"};
+	private static int hexIndex=0;
 	private int numTerritories = 0;
 	private int numArmy = 45;
 	private int i = 0;
 	private ArrayList<Territory> TerritoriesOwned = new ArrayList<Territory>();
 	private Card[] arrayCards = new Card[20];
 
-	public Player(String colour){ 
-		sPlayerColour = colour;
+	public Player(){ 
+		
 	}
-	
-	public Player(String nameInput, int numArmyInput,String colour){ 
+
+	public Player(String nameInput, int numArmyInput){ 
 		name = nameInput;
 		numArmy = numArmyInput;
-		sPlayerColour = colour;
 	}
+	
+	public String getHexColour(){
+		return ColourListhex[hexIndex];
+	}
+	
+	public String setColour(){
+		 //return random color from the array of possible colors, makes the array smaller to avoid repeating colours.
+			Random randNum = new Random();
+			int index=randNum.nextInt(ColourList.length);
+			hexIndex=index;
+			String delete=ColourList[index];
+			ColourList=removeListElements(ColourList,delete);
+			return delete;		
+	}
+	
+	public String[] removeListElements(String Colours [], String delete){
+		String[] result =new String[Colours.length-1];
+		int j=0;
+		for(int i=0; i<Colours.length;i++){
+			if(Colours[i]!=delete){
+				result[j]=Colours[i];
+				j++;
+			}
+		}
+		return result;
+	}
+
+	
+	
+	
 	
 	public void setName(String x){ 
 		name = x;
