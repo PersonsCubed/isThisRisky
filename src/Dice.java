@@ -1,5 +1,5 @@
-import java.util.Random;
-//This class is going to be implemented in futur sprints when it is necessary to deal with multiple dice
+
+//This class is going to be implemented in future sprints when it is necessary to deal with multiple dice
 
 public class Dice {
 
