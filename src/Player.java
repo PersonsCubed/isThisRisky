@@ -1,74 +1,72 @@
-
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class Player {//Player class to set name and territories of player objects
+public class Player {
 	
+	private int id;
 	private String name;
-	private String sPlayerColour;
-	private int numTerritories = 0;
-	private int numArmy = 45;
-	private int i = 0;
-	private ArrayList<Territory> TerritoriesOwned = new ArrayList<Territory>();
-	private Card[] arrayCards = new Card[20];
-
-	public Player(){ 
-		
-	}
-
-	public Player(String nameInput, int numArmyInput){ 
-		name = nameInput;
-		numArmy = numArmyInput;
+	private int numUnits;
+	private ArrayList<Integer> dice = new ArrayList<Integer>();
+	private int battleLoss = 0;
+	
+	Player (int inId, String inName, int inNumUnits) {
+		id = inId;
+		name = inName;
+		numUnits = inNumUnits;
+		return;
 	}
 	
-	public void setName(String x){ 
-		name = x;
-	}
-	
-	public void setTerritories(String sCountryName,int x,int y){
-		TerritoriesOwned.add(new Territory(this.name,sCountryName, 1,x,y));
-		numTerritories++;
-	}
-	
-	public int getNumArmy(){
-		return numArmy;
-	}
-	
-	public String printTerritories(){
-		
-		String allTerritories = "";
-		
-		for(i=0; i<numTerritories; i++){
-			allTerritories += TerritoriesOwned.get(i).getCountryName() + "\n";
+	public void rollDice (int numDice) {
+		dice.clear();
+		for (int j=0; j<numDice; j++) {
+				dice.add(1 + (int)(Math.random() * 6));   
 		}
-		
-		return allTerritories;
+		Collections.sort(dice, Collections.reverseOrder());
+		return;
+	}
+
+	public void addUnits (int inNum) {
+		numUnits = numUnits + inNum;
+		return;
 	}
 	
-	public String getName(){
+	public void subtractUnits (int inNum) {
+		numUnits = numUnits - inNum;
+		return;
+	}
+	
+	public int getId () {
+		return id;
+	}
+	
+	public String getName () {
 		return name;
 	}
 	
-	public void setCard(Card x){
-		
-		arrayCards[i]=x;
-		i++;
+	public int getNumUnits () {
+		return numUnits;
+	}
+
+	public ArrayList<Integer> getDice () {
+		return dice;
 	}
 	
-	public String getCard(){
-		String s = arrayCards[i-1].getTerritoryNameCard() + " - " + arrayCards[i-1].getTypeArmy();
-		return s;
+	public int getDie (int dieId) {
+		return dice.get(dieId);
 	}
-	public void setColour (String x){
-		sPlayerColour = x;
+	
+	public void resetBattleLoss () {
+		battleLoss = 0;
+		return;
 	}
-	public String getColour(){
-		return sPlayerColour;
+	
+	public void addBattleLoss () {
+		battleLoss++;
+		return;
 	}
-	public int iNumberTerritories(){
-		return TerritoriesOwned.size();
+	
+	public int getBattleLoss () {
+		return battleLoss;
 	}
-	public Territory getTerritory(int i){
-		return TerritoriesOwned.get(i);
-	}
+		
 }
-

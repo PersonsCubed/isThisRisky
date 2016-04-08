@@ -1,23 +1,21 @@
 
 public class Card {
 	
-	private String territoryNameCard;
-	private String typeArmy;
-	
-	public Card (String territoryName, String army){
-		territoryNameCard = territoryName;
-		typeArmy = army;
+	private int countryId;
+	private String countryName;
+
+	Card (int inCountryId, String inCountryName) {   
+		countryId = inCountryId;
+		countryName = inCountryName;
+		return;
 	}
 	
-	public Card(){
-		
+	public int getCountryId () {
+		return countryId;
 	}
 	
-	public String getTerritoryNameCard(){
-		return territoryNameCard;
+	public String getCountryName () {
+		return countryName;
 	}
 	
-	public String getTypeArmy(){
-		return typeArmy;
-	}
 }
